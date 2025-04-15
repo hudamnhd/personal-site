@@ -1,0 +1,163 @@
+---
+title: "Tutorial Install DWM in Debian 12"
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+
+DWM (Dynamic Window Manager) is a lightweight and minimalist window manager for the X11.
+DWm focuses on speed and simplicity, and alows users to configure the window display dynamically.
+
+## DWM Installation in Debian
+
+To install DWM in Debian, you can follow the following steps.
+
+<Steps>
+
+1. **Update System**:
+
+    Before installing any package, make sure your system is updated. Run the following commands to
+    update the repository and packages.
+
+    ```bash
+    sudo apt update && sudo apt upgrade
+    ```
+
+
+    DWM isn't available in Debian default repository, so you need to install it from the source. Here
+    are the steps to install DWM.
+
+2. **Install the required dependency package**:
+
+   ```bash
+   sudo apt install build-essential libx11-dev libxft-dev libxinerama-dev
+   ```
+
+3. **Clone repository DWM** from the DWM website:
+
+   ```bash
+   git clone https://git.suckless.org/dwm.git
+   ```
+
+4. **Enter dwm directory** that you clone:
+
+   ```bash
+   cd dwm
+   ```
+
+5. **Run this command**:
+
+   ```bash
+   sudo make clean install
+   ```
+
+   This command will build dwm and install it to your sistem.
+
+    To run dwm, you need to configure the Display Manager or directly use startx
+
+6. **use startx**: If you dont use the display manager, Run the following commands:
+
+   ```bash
+   startx
+   ```
+
+7. **Use Display Manager**: If you use a display manager like `lightdm` or `gdm`, choice session DWM
+   from login menu to start DWM.
+</Steps>
+
+## How to use DWM
+
+DWM has a minimalist philosophy, so there are not many default settings. After run DWM, you will
+be given very simple interface but can customizable.
+
+### Navigation DWM:
+
+- **New Window**: Press `Mod + Enter` to open new terminal (default st terminal).
+- **Move Window**: Press `Mod + j` or `Mod + k` to move between window.
+- **Close Window**: Press `Mod + Shift + q` to close the aktif window.
+- **Open Launcher**: Press `Mod + d` to open dmenu and search for the desired application
+- **Resize Window Tile**: Press `Mod + h` atau `Mod + l` to resize window.
+
+<Aside>`Mod` refer to the key used navigate, usually is `Alt` button or `Super` button (also known as Windows button).</Aside>
+
+### DWM configuration:
+
+If you want to change the settings or adjust the display, you can edit file config.def.h in the
+DWWM directory that you have clone.
+
+<Steps>
+1. To edit it:
+
+    ```bash
+    nano config.def.h
+    ```
+
+2. When finished, you need to build DWM with:
+
+    ```bash
+    sudo make clean install
+    ```
+</Steps>
+
+## Dwm patching with .diff files
+
+<Steps>
+1. **Download Patch File**
+
+    **Download Patch**: https://dwm.suckless.org/patches.
+
+    ```bash
+    wget https://dwm.suckless.org/patches/gridmode/dwm-gridmode-5.8.2.diff
+    ```
+2. **Apply Patch**
+
+    To apply patch on DWM, you can use the command `patch`. Make sure you are in the **dwm** folder and the diff file is in same directory or determine the relative path.
+
+    ```bash
+    patch -p1 < dwm-gridmode-5.8.2.diff
+    ```
+
+    Explanation of the command:
+    - `patch`: The command to apply patch on source code.
+    - `-p1`: Eliminating the first path of the path in the patch file (for example, `DWM-5.8.2/` at the beginning of each row of the patch file)
+    - `< dwm-gridmode-5.8.2.diff`: Directing the input from the patch file to the patch command.
+
+3. **Patch Verification**
+
+    After applying the patch, make sure to verify whether the patch has been applied correctly. You can
+    check whether changes have been applied by viewing updated files or searching for new features added.
+
+4. **Build DWM**
+
+    After the patch is applied, You need to build DWM so that the changes is applied on your sistem.
+
+    ```bash
+    sudo make clean install
+    ```
+
+    This command will clean the old DWM Installation and install a new version that has been updated with a patch.
+
+5. **Run DWM**
+
+    After successfully patching and installation. you can run dwm like Step 6.
+
+    ```bash
+    startx
+    ```
+
+6. **Delete Patch (If needed)**
+
+    If you want to delete the patch that has been applied, you can use the patch command with the -R option (reverse):
+
+    ```bash
+    patch -p1 -R < dwm-gridmode-5.8.2.diff
+    ```
+
+    This command will cancel the changes applied by the previous patch.
+</Steps>
+
+## Conclusion
+
+DWM is a lightweight and minimalist window manager, suitable for user who want a fast and adjusted desktop experience. Installation in Debian  is quite simple, even though you need to build it from the source. DWM provides full control over the appearance and behavior of the window, but requires time to adjust and learning the keyboard shorcut.
+
+By using DWM, you can create a work environment that is mote efficient and faster, as long as you
+are ready to adjust and configure according to your personal preferences.

@@ -1,0 +1,202 @@
+---
+title: Remix Fundamentals
+---
+import { LinkCard } from "@astrojs/starlight/components";
+
+## 1. Introduction to Remix
+
+Remix is a modern React framework designed to optimize user experience and server-side rendering (SSR). Remix focuses on fast loading, efficient data fetching, and a seamless developer experience. It combines the best features of React and the web platform, offering features like routing, data fetching, form handling, and much more, with full support for server-side rendering.
+
+### Key Points:
+- Remix enhances React applications with automatic routing and optimized rendering.
+- It allows for fine-grained control over data fetching and error handling.
+- Remix is built with performance in mind, focusing on fast loading and minimal client-side JavaScript.
+
+## 2. Installing Remix
+
+You can get started with Remix quickly by using the `create-remix` tool to initialize a new Remix project.
+
+### Step 1: Initialize a New Remix Project
+To create a new Remix project, run the following command in your terminal:
+
+```bash
+npx create-remix@latest
+```
+
+### Step 2: Choose the Project Type
+You will be prompted to choose a project setup:
+- **TypeScript** or **JavaScript**
+- **Remix App Server** (for production environments)
+- **Deployment Target** (e.g., Express, Netlify, etc.)
+
+After following the prompts, Remix will generate a new project with the necessary configuration files.
+
+### Step 3: Install Dependencies
+Once the project is created, navigate to your project folder and install the dependencies:
+
+```bash
+cd my-remix-app
+npm install
+```
+
+### Step 4: Start the Development Server
+To run your Remix application locally, execute:
+
+```bash
+npm run dev
+```
+
+This will start the development server and you can view your app at `http://localhost:3000`.
+
+## 3. Routing in Remix
+
+Remix uses file-based routing, meaning the file structure of your application determines the routes.
+
+### Creating Routes
+
+To create a new route, simply create a new file in the `app/routes` directory:
+```bash
+ app/
+├── routes/
+│   ├── _index.tsx
+│   ├── about.tsx
+│   ├── concerts.trending.tsx
+│   ├── concerts.salt-lake-city.tsx
+│   └── concerts.san-diego.tsx
+└── root.tsx
+
+app/routes/root.tsx  # Root layout
+app/routes/_index.tsx  # Index route
+app/routes/about.tsx  # About route
+```
+
+Each file in the `routes` folder represents a route in your app. For example:
+
+| URL                      | Matched Route                     |
+|--------------------------|-----------------------------------|
+| /                        | app/routes/_index.tsx             |
+| /about                   | app/routes/about.tsx              |
+| /concerts/trending       | app/routes/concerts.trending.tsx  |
+| /concerts/salt-lake-city | app/routes/concerts.salt-lake-cit |
+| /concerts/san-diego      | app/routes/concerts.san-diego.tsx |
+
+## 4. Data Fetching in Remix
+
+Remix encourages loading data at the route level to ensure that data is loaded before rendering the page, ensuring faster page loads and fewer client-side data fetching operations.
+
+### Using `loader` for Data Fetching
+
+Each route can export a `loader` function that runs on the server before the component is rendered, allowing you to fetch data.
+
+```typescript
+// app/routes/_index.tsx
+import { json, LoaderFunctionArgs } from '@remix-run/node';
+
+export const loader: LoaderFunctionArgs = async () => {
+  let data = await fetchDataFromAPI();
+  return json(data);
+};
+
+export default function Index() {
+  let data = useLoaderData<typeof loader>(); // Automatically gets the data returned by the loader
+  return <div>{data}</div>;
+}
+```
+
+**Why use `loader`?**
+- **Pre-fetching data**: Ensures that the necessary data is loaded before rendering the page, making the app faster and more SEO-friendly.
+- **Server-side data**: Data is fetched on the server, reducing the need for client-side fetching and improving performance.
+
+### Fetching Data in Nested Routes
+
+Each nested route can also define its own `loader` to fetch data.
+
+```javascript
+// app/routes/dashboard/index.tsx
+import { json, LoaderFunctionArgs } from '@remix-run/node';
+
+export const loader: LoaderFunctionArgs = async () => {
+  let dashboardData = await getDashboardData();
+  return json(dashboardData);
+};
+```
+
+## 5. Forms in Remix
+
+Forms in Remix are enhanced with built-in functionality for handling form submissions, including validation, data processing, and error handling.
+
+### Handling Form Submissions
+
+In Remix, you use the `action` function to handle form submissions on the server side.
+
+```javascript
+// app/routes/contact.tsx
+import { json, ActionFunctionArgs } from '@remix-run/node';
+import { Form } from '@remix-run/react';
+
+export const action: ActionFunctionArgs = async ({ request }) => {
+  let formData = new URLSearchParams(await request.text());
+  let name = formData.get('name');
+  let email = formData.get('email');
+
+  await saveContactForm(name, email);
+  return json({ success: true });
+};
+
+export default function Contact() {
+  return (
+    <Form method="post">
+      <input type="text" name="name" placeholder="Your Name" />
+      <input type="email" name="email" placeholder="Your Email" />
+      <button type="submit">Submit</button>
+    </Form>
+  );
+}
+```
+
+**Why use `action`?**
+- **Seamless form handling**: Forms are submitted and processed on the server, ensuring consistency and providing robust error handling.
+- **Built-in support for `POST`**: Form submissions with `POST` are handled automatically by Remix, simplifying backend logic.
+
+## 6. Error Handling in Remix
+
+Remix provides built-in error boundaries that allow you to catch errors at the route level and render a fallback UI.
+
+### Example: Handling Errors with Error Boundaries
+
+```javascript
+// app/routes/about.tsx
+import {
+  useRouteError,
+} from "@remix-run/react";
+
+export async function loader() {
+  if (badConditionIsTrue()) {
+    throw new Response("Oh no! Something went wrong!", {
+      status: 500,
+    });
+  }
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+  if (isRouteErrorResponse(error)) {
+    // error.status = 500
+    // error.data = "Oh no! Something went wrong!"
+  }
+}
+```
+
+**Why use Error Boundaries?**
+- **Improved user experience**: Prevents the whole app from crashing by showing a user-friendly error message.
+- **Localized error handling**: Errors are caught at the route level, making it easier to identify and resolve issues.
+
+## 7. Conclusion
+
+Remix is a modern framework that builds on top of React to enhance performance, improve developer experience, and ensure fast user experiences. With its routing, data loading, and form handling features, Remix helps you create scalable, fast, and user-friendly applications.
+
+To learn more about Remix:
+<LinkCard
+    title="Remix - Build Better Websites"
+    href="https://remix.run/"
+/>

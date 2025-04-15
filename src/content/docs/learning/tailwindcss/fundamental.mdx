@@ -1,0 +1,309 @@
+---
+title: Tailwind CSS Fundamentals
+---
+
+import { Tabs, TabItem, Steps } from "@astrojs/starlight/components";
+
+## 1. Introduction to Tailwind CSS
+
+Tailwind CSS is a utility-first CSS framework that allows developers to build custom designs without leaving the HTML. It provides low-level utility classes that you can combine to create unique and responsive user interfaces quickly.
+
+### Key Points:
+- Tailwind CSS uses utility classes for styling, making it highly customizable.
+- It is designed to be used with modern frontend tools such as React, Vue, and Angular.
+- Tailwind is known for its flexibility and ease of use in creating responsive layouts.
+
+## 2. Installation of Tailwind CSS
+
+Tailwind can be installed in a variety of ways, depending on the build tool you're using.
+
+### Install Tailwind CSS
+
+<Steps>
+
+1. Install Tailwind's official Vite plugin
+
+    <Tabs>
+        <TabItem label="npm">
+            ```sh
+            npm install --save-dev tailwindcss@next @tailwindcss/vite@next
+            ```
+        </TabItem>
+        <TabItem label="pnpm">
+            ```sh
+            pnpm add -D tailwindcss@next @tailwindcss/vite@next
+            ```
+        </TabItem>
+        <TabItem label="yarn">
+            ```sh
+            yarn add --dev tailwindcss@next @tailwindcss/vite@next
+            ```
+        </TabItem>
+    </Tabs>
+
+2. Add the plugin to config
+    <Tabs>
+        <TabItem label="react">
+            ```javascript title="vite.config.ts" ins={2,6}
+            import { defineConfig } from 'vite'
+            import tailwindcss from '@tailwindcss/vite'
+
+            export default defineConfig({
+              plugins: [
+                tailwindcss(),
+              ],
+            })
+            ```
+        </TabItem>
+        <TabItem label="astro">
+          ```ts title="astro.config.mjs" {tailwindcss()} ins={2} ins={7}
+          import { defineConfig } from 'astro/config';
+          import tailwindcss from '@tailwindcss/vite';
+
+          // https://astro.build/config
+          export default defineConfig({
+            vite: {
+              plugins: [tailwindcss()],
+            }
+          });
+          ```
+        </TabItem>
+    </Tabs>
+
+
+
+3. Import the CSS file that imports Tailwind into your components
+    <Tabs>
+        <TabItem label="react">
+            ```css title="src/styles/tailwind.css"
+            @import "tailwindcss";
+            ```
+
+            ```javascript title="src/main.tsx" ins={5}
+            import { StrictMode } from "react";
+            import { createRoot } from "react-dom/client";
+            import { router } from "./router";
+            import { RouterProvider } from "react-router";
+            import "./styles/tailwind.css";
+
+            createRoot(document.getElementById("root")!).render(
+                <StrictMode>
+                    <RouterProvider router={router} />
+                </StrictMode>,
+            );
+            ```
+        </TabItem>
+        <TabItem label="astro">
+
+          ```css title="src/styles/tailwind.css"
+          @import "tailwindcss";
+          ```
+          ```astro title="src/layouts/Layout.astro" ins={2} "class="max-w-2xl""
+          ---
+          import "../styles/tailwind.css";
+          ---
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <!-- ... -->
+            </head>
+            <body>
+              <article class="max-w-2xl">
+                <slot />
+              </article>
+            </body>
+          </html>
+          ```
+        </TabItem>
+    </Tabs>
+</Steps>
+
+### CDN Installation (For quick usage)
+
+You can include Tailwind CSS via CDN in the `<head>` of your HTML file:
+
+```html title="index.html" ins={6,9-11}
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <h1 class="text-3xl font-bold underline">
+      Hello world!
+    </h1>
+  </body>
+</html>
+```
+
+Another method installation : https://tailwindcss.com/docs/installation
+
+## 3. Tailwind CSS Classes
+
+Tailwind provides a wide range of utility classes for styling elements. Some of the most common categories include:
+
+### Layout
+- `container`: Centers content and sets a maximum width.
+- `mx-auto`: Sets horizontal margins to `auto` for centering an element.
+- `flex`: Defines a flexbox container.
+- `grid`: Defines a grid container.
+
+Example:
+```html
+<div class="container mx-auto">
+  <div class="grid grid-cols-3 gap-4">
+    <div class="bg-blue-500">Item 1</div>
+    <div class="bg-green-500">Item 2</div>
+    <div class="bg-red-500">Item 3</div>
+  </div>
+</div>
+```
+
+### Typography
+- `text-xl`, `text-2xl`: Sets the font size.
+- `font-bold`: Applies bold font weight.
+- `text-center`: Centers text horizontally.
+
+Example:
+```html
+<h1 class="text-3xl font-bold text-center">Welcome to Tailwind CSS</h1>
+<p class="text-lg text-gray-600">This is an example paragraph styled with Tailwind CSS.</p>
+```
+
+### Colors
+Tailwind provides a large palette of colors for text, background, borders, and more.
+- `bg-blue-500`: Sets the background color.
+- `text-white`: Sets the text color.
+- `border-gray-300`: Sets the border color.
+
+Example:
+```html
+<div class="bg-blue-500 text-white p-4">This is a blue box.</div>
+```
+
+### Spacing
+Tailwind CSS uses spacing utilities for padding, margin, and more.
+
+- `p-4`: Adds padding of `1rem` on all sides.
+- `m-4`: Adds margin of `1rem` on all sides.
+- `px-6`: Adds horizontal padding.
+- `py-6`: Adds vertical padding.
+
+Example:
+```html
+<div class="p-6 m-4 bg-gray-200">This element has padding and margin.</div>
+```
+
+### Borders and Radius
+- `border`: Adds a border to an element.
+- `rounded`: Adds rounded corners.
+- `rounded-lg`: Adds large rounded corners.
+
+Example:
+```html
+<div class="border rounded-lg p-4">This box has a border and rounded corners.</div>
+```
+
+## 4. Responsive Design with Tailwind CSS
+
+Tailwind CSS includes responsive utilities that make it easy to create mobile-first designs.
+
+### Example of Responsive Design:
+```html
+<div class="bg-red-500 p-4 sm:bg-green-500 md:bg-blue-500 lg:bg-yellow-500">
+  This div changes color based on screen size.
+</div>
+```
+
+Explanation:
+- `sm:` applies styles for screen widths `640px` and above.
+- `md:` applies styles for screen widths `768px` and above.
+- `lg:` applies styles for screen widths `1024px` and above.
+
+### Tailwind's Default Breakpoints:
+- `sm`: `640px` (small screens like phones)
+- `md`: `768px` (tablets)
+- `lg`: `1024px` (desktops)
+- `xl`: `1280px` (large desktops)
+
+## 5. Customizing Tailwind CSS
+
+Tailwind is highly customizable via the `tailwind.config.ts` file, which allows you to extend or modify the default configuration.
+
+### Example: Extending the Color Palette
+```javascript
+// tailwind.config.ts
+
+import type { Config } from 'tailwindcss';
+
+import defaultTheme from 'tailwindcss/defaultTheme';
+
+const config: Config = {
+  darkMode: ['class'],
+  content: ['./src/**/*.{html,js,svelte,ts}'],
+  theme: {
+    extend: {
+      colors: {
+        customBlue: '#1c3d5b',
+      },
+    }
+  },
+};
+
+export default config;
+```
+
+### Example: Adding Custom Fonts
+```typescript
+// tailwind.config.ts
+
+import type { Config } from 'tailwindcss';
+
+import defaultTheme from 'tailwindcss/defaultTheme';
+
+const config: Config = {
+  darkMode: ['class'],
+  content: ['./src/**/*.{html,js,svelte,ts}'],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Geist', ...defaultTheme.fontFamily.sans],
+        mono: ['GeistMono', ...defaultTheme.fontFamily.mono],
+      },
+    }
+  },
+};
+
+export default config;
+```
+
+## 6. Plugins in Tailwind CSS
+
+Tailwind supports a wide range of plugins that add extra functionality.
+
+- **Typography Plugin**: For styling rich text.
+- **Forms Plugin**: For form-related utilities.
+- **Aspect-Ratio Plugin**: For controlling aspect ratios.
+
+To install a plugin, you can use npm or yarn.
+
+### Example: Installing the Typography Plugin
+```bash
+npm install @tailwindcss/typography
+```
+
+ **Configure Tailwind Typography** by adding the following to your CSS file:
+
+```css title="src/styles/global.css" ins={2-3}
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@config "../../tailwind.config.ts";
+```
+
+## 7. Conclusion
+
+Tailwind CSS is a powerful utility-first framework that enables rapid web development. By using utility classes, developers can create highly customizable and responsive user interfaces with minimal effort. Tailwind's extensive configuration options and plugins further enhance its versatility, making it suitable for all types of web projects.
+
+Happy coding with Tailwind CSS!

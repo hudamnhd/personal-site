@@ -1,0 +1,174 @@
+---
+title: Node.js and npm Fundamentals
+---
+
+## 1. Introduction to Node.js
+
+Node.js is an open-source, cross-platform JavaScript runtime environment that allows developers to run JavaScript code outside of a web browser. It is built on the V8 JavaScript engine, which is used in Google Chrome. Node.js is designed for building scalable network applications and is widely used for server-side development.
+
+### Key Points:
+- Node.js uses an event-driven, non-blocking I/O model, which makes it lightweight and efficient.
+- It is commonly used for building back-end services like APIs, real-time applications, and microservices.
+- Node.js uses npm (Node Package Manager) for managing packages and dependencies.
+
+## 2. Installing Node.js
+
+You can install Node.js using different methods. One of the easiest ways to install Node.js on Linux is by using the package manager.
+
+### Install Node.js on Debian/Ubuntu:
+```bash
+sudo apt update
+sudo apt install nodejs
+sudo apt install npm
+```
+
+### Verify Installation:
+```bash
+node -v
+npm -v
+```
+
+This will output the version numbers of Node.js and npm installed.
+
+## 3. npm (Node Package Manager)
+
+npm is the default package manager for Node.js, and it allows you to install, share, and manage packages for your Node.js projects.
+
+### Basic npm Commands:
+
+#### Install a Package Globally
+```bash
+sudo npm install -g package-name
+```
+
+#### Install a Package Locally
+```bash
+npm install package-name
+```
+
+#### Uninstall a Package Globally
+```bash
+sudo npm uninstall -g package-name
+```
+
+#### Uninstall a Package Locally
+```bash
+npm uninstall package-name
+```
+
+#### List Installed Packages
+```bash
+npm list
+```
+
+#### Create a `package.json` File
+To initialize a new Node.js project and create a `package.json` file, run:
+```bash
+npm init
+```
+
+This will prompt you to fill out some details about the project.
+
+#### Update npm
+To update npm to the latest version, use the following command:
+```bash
+npm install -g npm@latest
+```
+
+## 4. Introduction to nvm (Node Version Manager)
+
+nvm is a tool that allows you to manage multiple versions of Node.js on the same machine. It is useful when you need to switch between different versions of Node.js for different projects.
+
+### Install nvm on Debian/Ubuntu:
+
+1. Install the required dependencies:
+```bash
+sudo apt update
+sudo apt install curl
+```
+
+2. Install nvm by running the following command:
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+```
+
+3. Restart your terminal or source your profile:
+```bash
+source ~/.bashrc
+```
+
+4. Verify nvm installation:
+```bash
+nvm --version
+```
+
+### Using nvm to Install and Manage Node.js Versions:
+
+#### Install a Specific Version of Node.js
+```bash
+nvm install 16.13.0
+```
+
+#### Use a Specific Version of Node.js
+```bash
+nvm use 16.13.0
+```
+
+#### List Installed Node.js Versions
+```bash
+nvm ls
+```
+
+#### Set Default Node.js Version
+```bash
+nvm alias default 16.13.0
+```
+
+## 5. Introduction to pnpm (Performant npm)
+
+pnpm is an alternative to npm that is faster and more efficient. It uses a unique node_modules layout that stores dependencies in a single place, which reduces disk space usage and speeds up installations.
+
+### Install pnpm:
+
+To install pnpm, you can use npm (once npm is installed):
+```bash
+npm install -g pnpm
+```
+
+### Basic pnpm Commands:
+
+#### Install Dependencies Using pnpm
+```bash
+pnpm install
+```
+
+#### Install a Package
+```bash
+pnpm add package-name
+```
+
+#### Uninstall a Package
+```bash
+pnpm remove package-name
+```
+
+#### Update a Package
+```bash
+pnpm update package-name
+```
+
+#### List Installed Packages
+```bash
+pnpm list
+```
+
+#### Create a New Project with pnpm
+```bash
+pnpm init
+```
+
+## 6. Conclusion
+
+Node.js, npm, nvm, and pnpm are essential tools for modern JavaScript development. Node.js allows for building server-side applications, while npm and pnpm help manage dependencies efficiently. nvm is particularly useful for managing multiple versions of Node.js. By mastering these tools, you'll be able to build scalable and efficient applications with ease.
+
+Happy coding!

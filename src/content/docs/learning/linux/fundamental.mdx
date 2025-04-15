@@ -1,0 +1,252 @@
+---
+title: Linux Fundamentals
+sidebar:
+  order: 1
+---
+
+## 1. Introduction to Linux
+
+Linux is an open-source, Unix-like operating system kernel that serves as the foundation for various operating systems. It is widely used for servers, desktops, and embedded systems due to its reliability, flexibility, and security. Many distributions (distros) of Linux are available, such as Ubuntu, Fedora, CentOS, and Debian.
+
+### Key Points:
+- Linux is free and open-source, meaning anyone can use, modify, and distribute it.
+- Linux is known for its stability and security, which makes it popular for servers and mission-critical systems.
+- The Linux kernel manages system resources, hardware, and software interactions.
+
+## 2. Basic Linux Commands
+
+Linux commands are used to interact with the operating system via the command-line interface (CLI). Here are some essential Linux commands:
+
+### Navigating the Filesystem
+
+- **`pwd`**: Print the current working directory.
+  ```bash
+  pwd
+  ```
+
+- **`ls`**: List the contents of a directory.
+  ```bash
+  ls
+  ls -l  # For detailed listing
+  ```
+
+- **`cd`**: Change directory.
+  ```bash
+  cd /path/to/directory
+  cd ~   # Go to home directory
+  cd ..  # Go up one directory
+  ```
+
+- **`mkdir`**: Create a new directory.
+  ```bash
+  mkdir new_directory
+  ```
+
+- **`rmdir`**: Remove an empty directory.
+  ```bash
+  rmdir empty_directory
+  ```
+
+### File Operations
+
+- **`touch`**: Create a new empty file.
+  ```bash
+  touch newfile.txt
+  ```
+
+- **`cat`**: View the contents of a file.
+  ```bash
+  cat file.txt
+  ```
+
+- **`cp`**: Copy files or directories.
+  ```bash
+  cp source.txt destination.txt
+  cp -r source_directory/ destination_directory/
+  ```
+
+- **`mv`**: Move or rename files or directories.
+  ```bash
+  mv old_name.txt new_name.txt
+  mv file.txt /path/to/directory/
+  ```
+
+- **`rm`**: Remove files or directories.
+  ```bash
+  rm file.txt
+  rm -r directory/  # Remove directory recursively
+  ```
+
+### Viewing and Searching Files
+
+- **`less`**: View the contents of a file, allowing you to scroll.
+  ```bash
+  less file.txt
+  ```
+
+- **`head`**: View the first 10 lines of a file.
+  ```bash
+  head file.txt
+  ```
+
+- **`tail`**: View the last 10 lines of a file.
+  ```bash
+  tail file.txt
+  ```
+
+- **`grep`**: Search for patterns in files.
+  ```bash
+  grep "pattern" file.txt
+  grep -r "pattern" /path/to/directory/  # Search recursively
+  ```
+
+## 3. File Permissions
+
+In Linux, file permissions are an important part of system security. Each file and directory has permissions that define who can read, write, or execute the file.
+
+### Understanding File Permissions
+
+- **`r`**: Read permission allows viewing the contents of a file.
+- **`w`**: Write permission allows modifying the contents of a file.
+- **`x`**: Execute permission allows running the file as a program.
+
+### Viewing File Permissions
+
+Use the **`ls -l`** command to view file permissions.
+
+```bash
+ls -l file.txt
+```
+
+Output example:
+```bash
+-rwxr-xr-- 1 user group 0 Jan 1 12:00 file.txt
+```
+Explanation:
+- **`rwx`**: Owner has read, write, and execute permissions.
+- **`r-x`**: Group has read and execute permissions.
+- **`r--`**: Others have read-only permission.
+
+### Changing File Permissions
+
+- **`chmod`**: Change file permissions.
+  ```bash
+  chmod +x file.sh  # Add execute permission
+  chmod 755 file.sh  # Set permissions (rwxr-xr-x)
+  ```
+
+- **`chown`**: Change file owner and group.
+  ```bash
+  chown user:group file.txt
+  ```
+
+- **`chgrp`**: Change the group of a file.
+  ```bash
+  chgrp group file.txt
+  ```
+
+## 4. Processes and System Monitoring
+
+Linux allows you to monitor and manage running processes and system resources.
+
+### Viewing Running Processes
+
+- **`ps`**: Show information about running processes.
+  ```bash
+  ps aux  # Display all running processes
+  ```
+
+- **`top`**: Display real-time system resource usage, including CPU and memory.
+  ```bash
+  top
+  ```
+
+- **`htop`**: An enhanced version of `top` with a more user-friendly interface (requires installation).
+  ```bash
+  sudo apt install htop
+  htop
+  ```
+
+- **`kill`**: Terminate a running process.
+  ```bash
+  kill <PID>  # Kill by process ID
+  kill -9 <PID>  # Force kill a process
+  ```
+
+### Disk Usage
+
+- **`df`**: Display disk space usage.
+  ```bash
+  df -h  # Show disk space in human-readable format
+  ```
+
+- **`du`**: Display directory space usage.
+  ```bash
+  du -sh /path/to/directory
+  ```
+
+## 5. Networking in Linux
+
+Linux provides several commands to manage and troubleshoot networking.
+
+### Checking Network Configuration
+
+- **`ifconfig`**: Display or configure network interfaces (older command, replaced by `ip` in many systems).
+  ```bash
+  ifconfig
+  ```
+
+- **`ip`**: Display and configure network interfaces.
+  ```bash
+  ip a  # Display all network interfaces
+  ip link set eth0 up  # Enable network interface eth0
+  ```
+
+- **`ping`**: Test network connectivity.
+  ```bash
+  ping google.com
+  ```
+
+- **`netstat`**: Display network connections and routing tables.
+  ```bash
+  netstat -tuln  # List all listening ports
+  ```
+
+## 6. Package Management
+
+Linux distributions have package managers that help you install, update, and remove software.
+
+### Debian-based systems (e.g., Ubuntu) use **`apt`**:
+
+- **`apt update`**: Update the package list.
+  ```bash
+  sudo apt update
+  ```
+
+- **`apt install`**: Install a package.
+  ```bash
+  sudo apt install package-name
+  ```
+
+- **`apt upgrade`**: Upgrade installed packages.
+  ```bash
+  sudo apt upgrade
+  ```
+
+- **`apt remove`**: Remove a package.
+  ```bash
+  sudo apt remove package-name
+  ```
+
+### Red Hat-based systems (e.g., Fedora) use **`yum`**:
+
+- **`yum install`**: Install a package.
+  ```bash
+  sudo yum install package-name
+  ```
+
+## 7. Conclusion
+
+Linux is a powerful and versatile operating system that is used in various environments, from desktop computing to large-scale server management. By mastering the basics of Linux, such as commands, file permissions, system monitoring, and package management, you can navigate and manage Linux systems efficiently.
+
+Happy coding!

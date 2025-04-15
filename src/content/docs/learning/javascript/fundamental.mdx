@@ -1,0 +1,690 @@
+---
+title: JavaScript Fundamentals
+---
+import { Aside } from '@astrojs/starlight/components';
+
+## 1. Introduction to JavaScript
+
+JavaScript is a high-level, dynamic, and interpreted programming language. It is one of the core technologies of web development, alongside HTML and CSS. JavaScript allows developers to add interactivity to websites, handle events, and manipulate the DOM (Document Object Model).
+
+### Key Points
+- JavaScript is client-side, but can also be used server-side (Node.js).
+- JavaScript code can run in the browser or on the server.
+- It is widely used for web applications, mobile apps, and more.
+
+## 2. Variables and Data Types
+
+In JavaScript, variables are used to store data. JavaScript has several data types, which can be categorized into **primitive** and **non-primitive** types.
+
+### Primitive Data Types
+- `String`: Represents textual data. Example: `"Hello World"`
+- `Number`: Represents numeric values. Example: `42`
+- `Boolean`: Represents `true` or `false`. Example: `true`
+- `Undefined`: Represents a variable that has been declared but not yet assigned a value.
+- `Null`: Represents the intentional absence of any value.
+- `Symbol`: Represents a unique value, often used for object properties.
+
+### Non-Primitive Data Types
+- `Object`: Represents a collection of key-value pairs. Example: `{name: "Huda", age: 30}`
+- `Array`: Represents an ordered list of values. Example: `[1, 2, 3, 4]`
+
+### Declaring Variables
+JavaScript has three ways to declare variables:
+1. `var` (function-scoped)
+2. `let` (block-scoped)
+3. `const` (block-scoped, read-only)
+
+Example:
+```javascript
+let name = "Huda";
+const age = 25;
+var isStudent = true;
+```
+
+## 3. Operators
+
+JavaScript supports a variety of operators used for manipulating variables and values.
+
+### Arithmetic Operators
+- `+`: Addition
+- `-`: Subtraction
+- `*`: Multiplication
+- `/`: Division
+- `%`: Modulo (remainder)
+
+### Comparison Operators
+- `==`: Equal to (loose comparison)
+- `===`: Equal to (strict comparison)
+- `!=`: Not equal to
+- `!==`: Not equal to (strict comparison)
+- `>`: Greater than
+- `<`: Less than
+- `>=`: Greater than or equal to
+- `<=`: Less than or equal to
+
+### Logical Operators
+- `&&`: AND
+- `||`: OR
+- `!`: NOT
+
+## 4. Control Flow Statements
+
+### Conditional Statements
+
+Conditional statements are used to perform different actions based on different conditions.
+
+- `if`: Executes a block of code if the condition is true.
+- `else`: Executes a block of code if the condition is false.
+- `else if`: Specifies a new condition if the previous condition is false.
+
+Example:
+```javascript
+if (age >= 18) {
+  console.log("Adult");
+} else {
+  console.log("Not an adult");
+}
+```
+
+### Switch Statement
+
+The `switch` statement is used to execute one out of many blocks of code based on a condition.
+
+Example:
+```javascript
+switch (day) {
+  case "Monday":
+    console.log("Start of the week");
+    break;
+  case "Friday":
+    console.log("End of the week");
+    break;
+  default:
+    console.log("Midweek");
+}
+```
+
+## 5. Functions
+
+Functions are blocks of code that can be executed when called.
+
+### Function Declaration
+```javascript
+function greet(name) {
+  return "Hello, " + name;
+}
+console.log(greet("Huda")); // Output: "Hello, Huda"
+```
+
+### Function Expression
+```javascript
+const greet = function(name) {
+  return "Hello, " + name;
+};
+console.log(greet("Bob")); // Output: "Hello, Bob"
+```
+
+### Arrow Functions
+Arrow functions provide a shorter syntax for writing functions.
+
+```javascript
+const greet = (name) => {
+  return "Hello, " + name;
+};
+console.log(greet("Charlie")); // Output: "Hello, Charlie"
+```
+
+## 6. Arrays
+
+An array is a list-like object used to store multiple values. JavaScript provides a variety of methods for manipulating arrays.
+
+### Array Methods
+
+- **`push()`**: Adds an item to the end of an array.
+  ```javascript
+  let numbers = [1, 2, 3];
+  numbers.push(4);  // [1, 2, 3, 4]
+  ```
+  **Why use it**: Useful for adding elements to the end of the array without modifying the existing order of elements.
+
+- **`pop()`**: Removes the last item of an array.
+  ```javascript
+  let numbers = [1, 2, 3];
+  let removed = numbers.pop();  // removed = 3, numbers = [1, 2]
+  ```
+  **Why use it**: Handy when you want to remove the last element, like for stack-based operations.
+
+- **`shift()`**: Removes the first item of an array.
+  ```javascript
+  let numbers = [1, 2, 3];
+  let removed = numbers.shift();  // removed = 1, numbers = [2, 3]
+  ```
+  **Why use it**: Useful for queue-like operations where you remove items from the start.
+
+- **`unshift()`**: Adds an item to the beginning of an array.
+  ```javascript
+  let numbers = [2, 3];
+  numbers.unshift(1);  // [1, 2, 3]
+  ```
+  **Why use it**: Adds elements to the start of the array, often used when you're working with stacks or queues.
+
+- **`forEach()`**: Executes a provided function once for each array element.
+  ```javascript
+  let numbers = [1, 2, 3];
+  numbers.forEach((num) => {
+    console.log(num * 2);
+  });
+  // Output: 2, 4, 6
+  ```
+  **Why use it**: Ideal for performing actions on each element without changing the array itself.
+
+- **`map()`**: Creates a new array with the results of calling a provided function on every element in the calling array.
+  ```javascript
+  let numbers = [1, 2, 3];
+  let doubled = numbers.map(num => num * 2);
+  console.log(doubled);  // [2, 4, 6]
+  ```
+  **Why use it**: Best used when you need to transform an array into a new one while maintaining the original array. It does not mutate the original array.
+
+- **`filter()`**: Creates a new array with all elements that pass the test implemented by the provided function.
+  ```javascript
+  let numbers = [1, 2, 3, 4, 5];
+  let evenNumbers = numbers.filter(num => num % 2 === 0);
+  console.log(evenNumbers);  // [2, 4]
+  ```
+  **Why use it**: Useful when you want to extract a subset of elements based on a condition.
+
+- **`reduce()`**: Applies a function against an accumulator and each element in the array (from left to right) to reduce it to a single value.
+  ```javascript
+  let numbers = [1, 2, 3, 4];
+  let sum = numbers.reduce((acc, num) => acc + num, 0);
+  console.log(sum);  // 10
+  ```
+  **Why use it**: Great for reducing the array to a single value, such as calculating a sum, average, or merging elements.
+
+- **`find()`**: Returns the first element in the array that satisfies the provided testing function.
+  ```javascript
+  let numbers = [1, 2, 3, 4, 5];
+  let found = numbers.find(num => num > 3);
+  console.log(found);  // 4
+  ```
+  **Why use it**: Useful when you need to find the first element that meets a specific condition.
+
+- **`findIndex()`**: Returns the first index in the array that satisfies the provided testing function.
+  ```javascript
+  let numbers = [1, 2, 3, 4, 5];
+  let found = numbers.findIndex(num => num > 3);
+  console.log(found);  // 2
+  ```
+  **Why use it**: Useful when you need to find the first index that meets a specific condition.
+
+- **`some()`**: Tests whether at least one element in the array passes the provided function.
+  ```javascript
+  let numbers = [1, 2, 3, 4];
+  let hasEven = numbers.some(num => num % 2 === 0);
+  console.log(hasEven);  // true
+  ```
+  **Why use it**: Helps check if any element meets a condition, useful for validations or quick checks.
+
+- **`every()`**: Tests whether all elements in the array pass the provided function.
+  ```javascript
+  let numbers = [2, 4, 6];
+  let allEven = numbers.every(num => num % 2 === 0);
+  console.log(allEven);  // true
+  ```
+  **Why use it**: Perfect for checking if all elements in the array satisfy a condition.
+
+- **`includes()`**: Determines whether an array contains a certain element.
+  ```javascript
+  let numbers = [1, 2, 3, 4];
+  let containsThree = numbers.includes(3);
+  console.log(containsThree);  // true
+  ```
+  **Why use it**: A simple and effective way to check for the presence of an element in an array.
+
+- **`sort()`**: Sorts the elements of an array in place and returns the array.
+  ```javascript
+  let numbers = [4, 2, 3, 1];
+  numbers.sort();
+  console.log(numbers);  // [1, 2, 3, 4]
+  ```
+  **Why use it**: Essential for ordering elements, though be aware it sorts in lexicographical order by default.
+
+- **`reverse()`**: Reverses the order of the elements in an array.
+  ```javascript
+  let numbers = [1, 2, 3];
+  numbers.reverse();
+  console.log(numbers);  // [3, 2, 1]
+  ```
+  **Why use it**: Useful for reversing the array, commonly used in stack-like operations.
+
+### Conclusion
+
+These array methods provide powerful tools for managing and manipulating arrays in JavaScript. They enable you to transform data, filter results, aggregate values, and more. Using these methods can simplify your code, make it more readable, and help you achieve specific goals more efficiently.
+
+## 7. Loops
+
+Loops are used to execute a block of code repeatedly. In JavaScript, there are several types of loops that you can use, each with different purposes.
+
+### `for` Loop
+
+The `for` loop is one of the most commonly used loops in JavaScript. It runs a block of code a specific number of times.
+
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+**Explanation:**
+- The `for` loop takes three parts: initialization (`let i = 0`), condition (`i < 5`), and the increment (`i++`).
+- It starts from `i = 0`, runs until `i < 5`, and increments `i` by 1 after each iteration.
+
+### `for...of` Loop
+
+The `for...of` loop is used to iterate over iterable objects like arrays, strings, and other array-like objects. It provides a cleaner syntax for iterating over the values of an iterable object.
+
+```javascript
+let numbers = [1, 2, 3, 4, 5];
+for (let number of numbers) {
+  console.log(number);
+}
+```
+
+**Explanation:**
+- The `for...of` loop iterates over the values of the iterable `numbers` and assigns each value to the variable `number` on each iteration.
+- This loop is particularly useful when you don't need access to the index (like in a traditional `for` loop).
+
+### `while` Loop
+
+The `while` loop runs a block of code as long as the specified condition evaluates to `true`.
+
+```javascript
+let i = 0;
+while (i < 5) {
+  console.log(i);
+  i++;
+}
+```
+
+**Explanation:**
+- The `while` loop continues to run as long as the condition (`i < 5`) is true.
+- It's commonly used when the number of iterations is unknown.
+
+### `do...while` Loop
+
+The `do...while` loop is similar to the `while` loop, but it guarantees that the block of code will run at least once because the condition is checked after the code executes.
+
+```javascript
+let i = 0;
+do {
+  console.log(i);
+  i++;
+} while (i < 5);
+```
+
+**Explanation:**
+- The `do...while` loop runs the block of code first, then checks the condition (`i < 5`).
+- It is useful when you need to run the code at least once, regardless of the condition.
+
+---
+
+### Conclusion
+
+Each loop type serves a different purpose:
+- Use the **`for`** loop when you know how many times you want to iterate.
+- Use the **`for...of`** loop when you need to iterate over iterable objects like arrays or strings and only need the values.
+- Use the **`while`** loop when the number of iterations is unknown.
+- Use the **`do...while`** loop when you need the code to run at least once.
+
+These loop structures are essential for efficiently working with collections of data and controlling flow in JavaScript.
+
+## 8. Objects
+
+Objects are collections of key-value pairs.
+
+### Creating an Object that Can Be Iterated
+
+```javascript
+let person = {
+  name: "Alice",
+  age: 30,
+  job: "Engineer",
+  greet: function() {
+    console.log("Hello, " + this.name);
+  }
+};
+
+// Iterating over object keys
+Object.keys(person).forEach(key => {
+  console.log(key);  // Logs: name, age, job, greet
+});
+
+// Iterating over object values
+Object.values(person).forEach(value => {
+  console.log(value);  // Logs: Alice, 30, Engineer, [Function: greet]
+});
+
+// Iterating over object key-value pairs
+Object.entries(person).forEach(([key, value]) => {
+  console.log(key + ": " + value);
+  // Logs:
+  // name: Alice
+  // age: 30
+  // job: Engineer
+  // greet: function
+});
+```
+
+### Explanation:
+
+1. **`Object.keys()`**: Returns an array of the object's keys (property names). You can then iterate over them using `.forEach()`, `map()`, or other array methods.
+   - Example output: `["name", "age", "job", "greet"]`
+
+2. **`Object.values()`**: Returns an array of the object's values (property values). You can then iterate over these values.
+   - Example output: `["Alice", 30, "Engineer", function]`
+
+3. **`Object.entries()`**: Returns an array of key-value pairs, where each pair is an array of `[key, value]`. This is useful for iterating over both keys and values at the same time.
+   - Example output: `[["name", "Alice"], ["age", 30], ["job", "Engineer"], ["greet", function]]`
+
+### Additional Object Methods:
+
+- **`Object.assign()`**: Copies the values of all enumerable properties from one or more source objects to a target object.
+
+  ```javascript
+  let target = { city: "New York" };
+  let source = { country: "USA", continent: "North America" };
+  let newObj = Object.assign(target, source);
+  console.log(newObj);  // { city: "New York", country: "USA", continent: "North America" }
+  ```
+
+- **`Object.freeze()`**: Freezes an object, preventing any modifications to it (i.e., adding, deleting, or changing properties).
+
+  ```javascript
+  let person = { name: "Bob" };
+  Object.freeze(person);
+  person.name = "Alice";  // This won't work because the object is frozen
+  console.log(person.name);  // Output: "Bob"
+  ```
+
+- **`Object.getOwnPropertyNames()`**: Returns an array of all properties (including non-enumerable ones) of an object.
+
+  ```javascript
+  let person = { name: "Alice", age: 30 };
+  let properties = Object.getOwnPropertyNames(person);
+  console.log(properties);  // Output: ["name", "age"]
+  ```
+
+- **`Object.hasOwnProperty()`**: Checks if an object has a specific property as its own property (not inherited).
+
+  ```javascript
+  let person = { name: "Alice", age: 30 };
+  console.log(person.hasOwnProperty("name"));  // Output: true
+  console.log(person.hasOwnProperty("job"));   // Output: false
+  ```
+
+### Conclusion:
+
+Using these `Object` methods, you can easily iterate over objects and manipulate them in various ways. These methods are essential for working with JavaScript objects, especially when you need to access or modify the properties dynamically.
+
+## 9. DOM Manipulation
+
+JavaScript allows you to interact with and manipulate the DOM (Document Object Model).
+
+### Selecting Elements
+```javascript
+let element = document.getElementById("myElement");
+let elements = document.getElementsByClassName("myClass");
+let queryElement = document.querySelector(".myClass");
+```
+
+### Modifying Elements
+```javascript
+element.innerHTML = "New Content";
+element.style.color = "blue";
+```
+
+## 10. Event Handling
+
+JavaScript provides ways to handle events such as clicks, keypresses, etc.
+
+### Example: Handling Click Event
+```javascript
+let myButton = document.getElementById("myButton");
+
+myButton.addEventListener("click", function() {
+  alert("Button clicked!");
+});
+```
+
+## 11. ES6 Features
+
+ES6 (ECMAScript 2015) introduced several new features to JavaScript.
+
+### Template Literals
+```javascript
+let name = "Huda";
+let greeting = `Hello, ${name}!`;
+console.log(greeting); // Output: "Hello, Huda!"
+```
+
+### Destructuring
+
+Destructuring in JavaScript allows you to unpack values from arrays or properties from objects into distinct variables. It's a cleaner, more concise way of extracting data.
+
+#### Use Cases of Destructuring
+
+##### Object Destructuring
+
+Instead of accessing each property individually, you can extract them in one line.
+
+```javascript
+let person = { name: "Huda", age: 30 };
+let { name, age } = person;
+
+console.log(name);  // Output: "Huda"
+console.log(age);   // Output: 30
+```
+
+**Why Use It?**:
+- **Simplifies code**: Destructuring makes the code more readable and reduces the need to reference each property individually.
+- **Easy renaming**: You can also rename properties during destructuring for clarity.
+
+```javascript
+let person = { name: "Huda", age: 30 };
+let { name: fullName, age: yearsOld } = person;
+
+console.log(fullName);  // Output: "Huda"
+console.log(yearsOld);  // Output: 30
+```
+
+##### Array Destructuring
+
+It’s also possible to destructure arrays, which allows easy unpacking of array elements into variables.
+
+```javascript
+let arr = [1, 2, 3];
+let [first, second] = arr;
+
+console.log(first);  // Output: 1
+console.log(second); // Output: 2
+```
+
+**Why Use It?**:
+- **Cleaner and more readable**: If you're working with multiple values from an array, destructuring is much cleaner than using array indices.
+- **Skip values**: You can skip elements when destructuring arrays.
+
+```javascript
+let arr = [1, 2, 3, 4];
+let [first, , third] = arr;
+
+console.log(first);  // Output: 1
+console.log(third);  // Output: 3
+```
+
+##### Default Values
+
+You can assign default values in case a property is `undefined`.
+
+```javascript
+let person = { name: "Huda" };
+let { name, age = 30 } = person;
+
+console.log(name);  // Output: "Huda"
+console.log(age);   // Output: 30 (since 'age' is undefined in the object)
+```
+
+**Why Use It?**:
+- **Prevents undefined errors**: If a key doesn’t exist, you can easily assign it a default value.
+- **Cleaner code**: Avoid extra checks and manual assignments of default values.
+
+<Aside>**Destructuring** makes extracting values from arrays and objects more concise and cleaner.</Aside>
+
+
+### Spread Operator
+
+The **spread operator** (`...`) allows you to expand or spread elements from an array or object into another array or object. It can be very useful in various scenarios such as merging arrays, cloning objects, and passing arguments to functions.
+
+#### Use Cases of Spread Operator
+
+##### Cloning an Array or Object
+
+If you want to create a shallow copy of an array or object, the spread operator is a simple and efficient way to do that.
+
+```javascript
+let arr1 = [1, 2, 3];
+let arr2 = [...arr1];  // Creating a shallow copy of arr1
+
+arr2.push(4);
+console.log(arr1);  // Output: [1, 2, 3]
+console.log(arr2);  // Output: [1, 2, 3, 4]
+```
+
+**Why Use It?**:
+- **Immutability**: Instead of modifying the original array or object, you create a new one, which helps in maintaining immutability, especially in state management in frameworks like React.
+- **Simple and readable**: The spread operator is easier to read and understand compared to methods like `Array.slice()` or `Object.assign()`.
+
+##### Merging Arrays or Objects
+
+You can combine multiple arrays or objects into a new one.
+
+```javascript
+let arr1 = [1, 2];
+let arr2 = [3, 4];
+let arr3 = [...arr1, ...arr2];  // Merging arrays
+
+console.log(arr3);  // Output: [1, 2, 3, 4]
+```
+
+Merging objects:
+
+```javascript
+let obj1 = { name: "Huda" };
+let obj2 = { age: 30 };
+let mergedObj = { ...obj1, ...obj2 };
+
+console.log(mergedObj);  // Output: { name: "Huda", age: 30 }
+```
+
+**Why Use It?**:
+- **Efficient merging**: Merging arrays and objects using the spread operator is much cleaner and more efficient than using methods like `concat()` for arrays or `Object.assign()` for objects.
+- **Non-destructive**: It doesn’t modify the original arrays or objects, preserving immutability.
+
+##### Function Arguments
+
+The spread operator can also be used to pass an array or object as individual arguments to a function.
+
+```javascript
+let numbers = [1, 2, 3];
+function sum(a, b, c) {
+  return a + b + c;
+}
+
+console.log(sum(...numbers));  // Output: 6
+```
+
+**Why Use It?**:
+- **Simplifies passing multiple arguments**: Instead of manually passing each item, you can spread the array directly into the function parameters.
+- **Flexible**: The spread operator is particularly useful for functions that accept a variable number of arguments.
+
+**Spread operator** is versatile for merging arrays or objects, cloning, and passing arguments to functions.
+
+### Classes
+
+**Classes** in JavaScript are syntactic sugar over the existing prototype-based inheritance. They allow you to define objects and their behavior in a more structured and readable way.
+
+#### Use Cases for Classes
+
+##### Defining a Class and Creating Instances
+
+Classes are useful when you need to create multiple objects with the same structure or behavior. You define a class to set up the blueprint, and then create instances of that class.
+
+```javascript
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  greet() {
+    console.log("Hello, " + this.name);
+  }
+}
+
+let person1 = new Person("Huda", 25);
+person1.greet();  // Output: "Hello, Huda"
+```
+
+**Why Use It?**:
+- **Encapsulation**: Classes allow you to bundle data (properties) and methods (functions) together in one structure, improving code organization.
+- **Inheritance**: You can extend classes to create new ones that inherit properties and methods from a base class.
+
+##### Inheritance with Classes
+
+You can use classes to create new classes based on an existing class by using `extends`. This is useful when you want to create a specialized version of a class.
+
+```javascript
+class Employee extends Person {
+  constructor(name, age, position) {
+    super(name, age);  // Calls the constructor of the parent class (Person)
+    this.position = position;
+  }
+
+  greet() {
+    console.log("Hello, I am " + this.name + ", a " + this.position);
+  }
+}
+
+let employee = new Employee("John", 35, "Software Engineer");
+employee.greet();  // Output: "Hello, I am John, a Software Engineer"
+```
+
+**Why Use It?**:
+- **Code reuse**: You can reuse the methods and properties from the parent class without having to redefine them in every new class.
+- **Inheritance**: Allows for specialization, where a child class can extend and override methods of the parent class.
+
+##### Static Methods
+
+Static methods are methods that belong to the class itself rather than to an instance of the class. They are often used for utility functions.
+
+```javascript
+class MathUtility {
+  static add(a, b) {
+    return a + b;
+  }
+}
+
+console.log(MathUtility.add(5, 3));  // Output: 8
+```
+
+**Why Use It?**:
+- **Utility methods**: Static methods are useful when you have operations that don't require access to instance properties but are still logically tied to the class.
+
+**Classes** provide a more structured way to define objects and allow for inheritance, encapsulation, and abstraction.
+
+### Conclusion
+
+
+This guide covers the fundamental concepts of JavaScript. As you continue to learn, you will discover more advanced topics such as asynchronous programming, closures, promises, and more. JavaScript is a versatile language, and mastering it will allow you to build dynamic and interactive web applications.
+
+Happy coding!
