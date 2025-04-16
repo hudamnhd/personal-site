@@ -6,8 +6,8 @@ import starlightBlog from "starlight-blog";
 // https://astro.build/config
 export default defineConfig({
 	i18n: {
-		locales: ["en", "id"],
-		defaultLocale: "en",
+		locales: ["id", "en"],
+		defaultLocale: "id",
 	},
 	integrations: [
 		starlight({
@@ -74,54 +74,54 @@ export default defineConfig({
 							label: "Linux",
 							collapsed: false,
 							items: [
-								"learning/linux/fundamental",
-								"learning/linux/awesome-linux-apps",
+								"learn/linux/fundamental",
+								"learn/linux/awesome-linux-apps",
 							],
 						},
 						{
 							label: "HTML",
 							collapsed: false,
-							items: ["learning/html/fundamental"],
+							items: ["learn/html/fundamental"],
 						},
 						{
 							label: "CSS",
-							items: ["learning/css/fundamental"],
+							items: ["learn/css/fundamental"],
 						},
 						{
 							label: "Tailwind CSS",
-							items: ["learning/tailwindcss/fundamental"],
+							items: ["learn/tailwindcss/fundamental"],
 						},
 						{
 							label: "Javascript",
-							items: ["learning/javascript/fundamental"],
+							items: ["learn/javascript/fundamental","learn/javascript/cheat-sheet"],
 						},
 						{
 							label: "Typescript",
-							items: ["learning/typescript/fundamental"],
+							items: ["learn/typescript/fundamental"],
 						},
 						{
 							label: "Node JS",
-							items: ["learning/nodejs/fundamental"],
+							items: ["learn/nodejs/fundamental"],
 						},
 						{
 							label: "React JS",
-							items: ["learning/reactjs/fundamental"],
+							items: ["learn/reactjs/fundamental"],
 						},
 						{
 							label: "Remix",
-							items: ["learning/remixjs/fundamental"],
+							items: ["learn/remixjs/fundamental"],
 						},
 						{
 							label: "Astro",
-							items: ["learning/astro/fundamental"],
+							items: ["learn/astro/fundamental"],
 						},
 						{
 							label: "My Sql",
-							items: ["learning/mysql/fundamental"],
+							items: ["learn/mysql/fundamental"],
 						},
 						{
 							label: "Prisma",
-							items: ["learning/prisma/fundamental"],
+							items: ["learn/prisma/fundamental"],
 						},
 					],
 				},

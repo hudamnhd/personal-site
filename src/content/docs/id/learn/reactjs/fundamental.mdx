@@ -1,0 +1,219 @@
+---
+title: React Fundamentals
+---
+
+## 1. Introduction to React
+
+React is a JavaScript library for building user interfaces, primarily for single-page applications. It allows developers to create reusable UI components and manage the state of their application efficiently. React's declarative approach simplifies the development process by updating the UI when the state changes.
+
+### Key Points:
+- React is component-based, meaning UIs are built from independent, reusable components.
+- React uses a virtual DOM to improve performance by minimizing direct manipulations to the actual DOM.
+- React allows for the development of dynamic, interactive web applications.
+
+## 2. Installing React
+
+To start using React, you'll need to set up a React project.
+
+### Using Vite
+```bash
+npm create vite@latest my-app --template react
+cd my-app
+npm install
+npm run dev
+```
+
+## 3. JSX (JavaScript XML)
+
+JSX is a syntax extension for JavaScript, used in React to describe what the UI should look like. It allows you to write HTML-like code in JavaScript.
+
+### Example:
+```jsx
+const element = <h1>Hello, World!</h1>;
+```
+
+JSX is transpiled into JavaScript by tools like Babel.
+
+### Key Points:
+- JSX allows you to mix HTML and JavaScript together.
+- It is not mandatory to use JSX in React, but it is highly recommended as it is more readable.
+
+## 4. Components
+
+React applications are built using components. Components are independent, reusable pieces of UI that manage their own state.
+
+### Types of Components:
+- **Functional Components**: Simple JavaScript functions that return JSX.
+- **Class Components**: More complex components that support lifecycle methods (less commonly used in modern React).
+
+### Example of a Functional Component:
+```jsx
+function Greeting() {
+  return <h1>Hello, World!</h1>;
+}
+```
+
+### Example of a Class Component:
+```jsx
+class Greeting extends React.Component {
+  render() {
+    return <h1>Hello, World!</h1>;
+  }
+}
+```
+
+## 5. Props (Properties)
+
+Props are used to pass data from a parent component to a child component. Props are read-only, meaning they cannot be modified by the child component.
+
+### Example:
+```jsx
+function Greeting(props) {
+  return <h1>Hello, {props.name}!</h1>;
+}
+
+function App() {
+  return <Greeting name="Alice" />;
+}
+```
+
+### Key Points:
+- Props allow components to be dynamic and reusable.
+- Props can be of any data type (string, number, object, array, etc.).
+
+## 6. State
+
+State is a way to store data that changes over time. In React, each component can have its own state.
+
+### Managing State in Functional Components (using `useState` Hook):
+```jsx
+import React, { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+    </div>
+  );
+}
+```
+
+### Key Points:
+- `useState` is a Hook that allows you to add state to functional components.
+- State is mutable and can be updated with the state setter function.
+
+## 7. Handling Events
+
+React allows you to handle events such as clicks, form submissions, etc.
+
+### Example:
+```jsx
+function Button() {
+  const handleClick = () => {
+    alert("Button clicked!");
+  };
+
+  return <button onClick={handleClick}>Click me</button>;
+}
+```
+
+### Key Points:
+- Events in React are named using camelCase (e.g., `onClick`, `onChange`).
+- Event handler functions are passed as props.
+
+## 8. Conditional Rendering
+
+In React, you can conditionally render components or elements based on the state or props.
+
+### Example:
+```jsx
+function Greeting(props) {
+  return props.isLoggedIn ? <h1>Welcome, {props.name}!</h1> : <h1>Please log in.</h1>;
+}
+```
+
+### Key Points:
+- Conditional rendering is typically done using JavaScript expressions inside JSX.
+
+## 9. Lists and Keys
+
+React uses keys to efficiently update the list of elements when data changes.
+
+### Example:
+```jsx
+const items = ["apple", "banana", "cherry"];
+
+function ItemList() {
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+### Key Points:
+- Keys help React identify which items have changed, are added, or are removed.
+
+## 10. useEffect Hook
+
+The `useEffect` hook allows you to perform side effects in your components (e.g., fetching data, updating the DOM, etc.).
+
+### Example:
+```jsx
+import React, { useState, useEffect } from 'react';
+
+function DataFetcher() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch("https://api.example.com/data")
+      .then(response => response.json())
+      .then(data => setData(data));
+  }, []); // Empty array means it runs only once when the component mounts
+
+  return <div>{data ? JSON.stringify(data) : "Loading..."}</div>;
+}
+```
+
+### Key Points:
+- `useEffect` runs after the component renders.
+- The second argument is an array of dependencies, which controls when the effect runs.
+
+## 11. React Router
+
+React Router is a standard library for routing in React. It allows navigation between different views or pages.
+
+### Example:
+```jsx
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+function App() {
+  return (
+    <Router>
+      <Switch>
+        <Route path="/" exact>
+          <h1>Home</h1>
+        </Route>
+        <Route path="/about">
+          <h1>About</h1>
+        </Route>
+      </Switch>
+    </Router>
+  );
+}
+```
+
+### Key Points:
+- React Router enables single-page applications by handling URL changes.
+
+## 12. Conclusion
+
+React is a powerful and flexible library for building user interfaces. By learning React fundamentals such as components, state, props, and hooks, you can start building dynamic web applications. As you continue to work with React, you'll encounter more advanced concepts such as context, reducers, and server-side rendering.
+
+Happy coding!

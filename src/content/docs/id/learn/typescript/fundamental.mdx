@@ -1,0 +1,269 @@
+---
+title: TypeScript Fundamentals
+---
+
+## 1. Introduction to TypeScript
+
+TypeScript is a statically typed superset of JavaScript that adds optional types, interfaces, and other features to help catch errors at compile time. TypeScript code can be compiled into JavaScript, making it compatible with existing JavaScript libraries and frameworks.
+
+### Key Points:
+- TypeScript enhances JavaScript by adding type annotations.
+- It allows developers to catch errors early during development.
+- TypeScript is fully compatible with JavaScript.
+
+## 2. Installing TypeScript
+
+To use TypeScript, you need to install it on your development environment.
+
+### Using npm:
+```bash
+npm install -g typescript
+```
+
+### Using yarn:
+```bash
+yarn add typescript
+```
+
+### Checking Installation:
+```bash
+tsc --version
+```
+
+## 3. Basic Types
+
+TypeScript provides several built-in types that help define the types of variables.
+
+### Primitive Types
+- `string`: Represents textual data.
+- `number`: Represents numeric data.
+- `boolean`: Represents `true` or `false` values.
+- `undefined`: Represents a variable that hasn't been assigned a value.
+- `null`: Represents an intentional absence of any value.
+- `any`: Can represent any type of value (essentially disabling type checking).
+- `void`: Used for functions that do not return a value.
+- `never`: Represents values that will never occur (e.g., functions that throw exceptions).
+
+Example:
+```typescript
+let name: string = "Huda";
+let age: number = 25;
+let isActive: boolean = true;
+let unknownValue: any = "Hello";
+```
+
+## 4. Arrays and Tuples
+
+### Arrays
+Arrays in TypeScript can be typed by specifying the type of the elements inside the array.
+
+```typescript
+let numbers: number[] = [1, 2, 3, 4];
+let strings: string[] = ["apple", "banana", "cherry"];
+```
+
+### Tuples
+Tuples allow you to store elements of different types in a fixed-size array.
+
+```typescript
+let user: [string, number] = ["Huda", 25];
+```
+
+## 5. Enums
+
+Enums are a way to define a set of named constants.
+
+### Example:
+```typescript
+enum Direction {
+  Up = 1,
+  Down,
+  Left,
+  Right
+}
+
+let move: Direction = Direction.Up;
+```
+
+## 6. Functions
+
+Functions in TypeScript can be typed by defining the types of arguments and the return type.
+
+### Function Declaration
+```typescript
+function greet(name: string): string {
+  return `Hello, ${name}`;
+}
+
+console.log(greet("Huda")); // Output: "Hello, Huda"
+```
+
+### Function Expression
+```typescript
+const greet = function(name: string): string {
+  return `Hello, ${name}`;
+};
+```
+
+### Arrow Functions
+```typescript
+const greet = (name: string): string => {
+  return `Hello, ${name}`;
+};
+```
+
+## 7. Objects
+
+Objects in TypeScript can have defined types for each property.
+
+### Example:
+```typescript
+let person: { name: string; age: number } = {
+  name: "Huda",
+  age: 25
+};
+```
+
+### Defining Object Types with Interfaces
+```typescript
+interface Person {
+  name: string;
+  age: number;
+}
+
+let person: Person = {
+  name: "Huda",
+  age: 25
+};
+```
+
+## 8. Type Aliases
+
+Type aliases allow you to create a new name for an existing type.
+
+### Example:
+```typescript
+type StringOrNumber = string | number;
+
+let value: StringOrNumber = 42;
+value = "Hello";
+```
+
+## 9. Type Assertions
+
+Type assertions are a way to tell TypeScript to treat a value as a specific type.
+
+### Example:
+```typescript
+let someValue: any = "This is a string";
+let strLength: number = (someValue as string).length;
+```
+
+## 10. Classes
+
+TypeScript supports object-oriented programming (OOP) with classes, constructors, and inheritance.
+
+### Example:
+```typescript
+class Person {
+  name: string;
+  age: number;
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+
+  greet(): string {
+    return `Hello, my name is ${this.name}`;
+  }
+}
+
+let person = new Person("Huda", 25);
+console.log(person.greet()); // Output: "Hello, my name is Huda"
+```
+
+### Inheritance
+```typescript
+class Employee extends Person {
+  position: string;
+
+  constructor(name: string, age: number, position: string) {
+    super(name, age);
+    this.position = position;
+  }
+
+  greet(): string {
+    return `Hello, I am ${this.name}, a ${this.position}.`;
+  }
+}
+
+let employee = new Employee("Bob", 30, "Developer");
+console.log(employee.greet()); // Output: "Hello, I am Bob, a Developer."
+```
+
+## 11. Generics
+
+Generics allow you to write reusable and type-safe code.
+
+### Example:
+```typescript
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+let output = identity("Hello"); // output has type string
+let numberOutput = identity(42); // output has type number
+```
+
+## 12. Modules
+
+TypeScript supports modularization, allowing you to organize code into separate files.
+
+### Exporting and Importing Modules
+```typescript
+// In file greeter.ts
+export function greet(name: string): string {
+  return `Hello, ${name}`;
+}
+
+// In file app.ts
+import { greet } from "./greeter";
+
+console.log(greet("Huda"));
+```
+
+## 13. Advanced Types
+
+TypeScript provides several advanced types such as union types, intersection types, and conditional types.
+
+### Union Types
+```typescript
+function log(value: string | number): void {
+  console.log(value);
+}
+
+log("Hello");
+log(42);
+```
+
+### Intersection Types
+```typescript
+interface A {
+  a: string;
+}
+
+interface B {
+  b: number;
+}
+
+type AB = A & B;
+
+let ab: AB = { a: "hello", b: 42 };
+```
+
+## 14. Conclusion
+
+TypeScript enhances JavaScript with static typing, which can help catch errors early and improve code quality. By learning TypeScript, you can build scalable, maintainable, and robust applications.
+
+Happy coding!

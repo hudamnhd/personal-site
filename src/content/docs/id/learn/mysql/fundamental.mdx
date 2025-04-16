@@ -1,0 +1,191 @@
+---
+title: MySQL Fundamentals
+---
+
+## 1. Introduction to MySQL
+
+MySQL is an open-source relational database management system (RDBMS) based on SQL (Structured Query Language). It is one of the most popular databases for web applications, particularly for applications built with PHP, Python, Java, and other server-side languages. MySQL is known for its speed, reliability, and ease of use.
+
+### Key Points:
+- MySQL is commonly used in web development.
+- It supports multiple storage engines such as InnoDB and MyISAM.
+- MySQL is cross-platform and can run on Linux, Windows, macOS, and more.
+
+## 2. Installing MySQL on Debian Linux
+
+### Update Your Package Index
+Before installing MySQL, it's important to update your package index to make sure you're installing the latest available versions.
+
+```bash
+sudo apt update
+```
+
+### Install MySQL Server
+To install MySQL server, run the following command:
+
+```bash
+sudo apt install mysql-server
+```
+
+### Verify MySQL Installation
+Once the installation is complete, check if MySQL is installed and running by executing:
+
+```bash
+sudo systemctl status mysql
+```
+
+If MySQL is running, you should see an active status.
+
+### Secure MySQL Installation
+After installing MySQL, it's recommended to run the `mysql_secure_installation` script to improve the security of your MySQL installation.
+
+```bash
+sudo mysql_secure_installation
+```
+
+This script will guide you through the process of:
+- Setting a root password (if you haven't already).
+- Removing insecure default settings.
+- Disabling remote root login.
+- Removing test databases.
+
+## 3. MySQL Basics
+
+### Accessing MySQL
+To access MySQL, run the following command:
+
+```bash
+sudo mysql -u root -p
+```
+
+You'll be prompted to enter the root password. Once logged in, you'll be in the MySQL command-line interface.
+
+### Basic MySQL Commands
+
+#### Create a Database
+```sql
+CREATE DATABASE my_database;
+```
+
+#### Show Databases
+```sql
+SHOW DATABASES;
+```
+
+#### Use a Database
+```sql
+USE my_database;
+```
+
+#### Create a Table
+```sql
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100)
+);
+```
+
+#### Insert Data into a Table
+```sql
+INSERT INTO users (name, email) VALUES ('Alice', 'alice@example.com');
+```
+
+#### Query Data from a Table
+```sql
+SELECT * FROM users;
+```
+
+#### Update Data in a Table
+```sql
+UPDATE users SET name = 'Bob' WHERE id = 1;
+```
+
+#### Delete Data from a Table
+```sql
+DELETE FROM users WHERE id = 1;
+```
+
+#### Drop a Table
+```sql
+DROP TABLE users;
+```
+
+## 4. User Management
+
+MySQL allows you to manage users and assign privileges to control access.
+
+#### Create a User
+```sql
+CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
+```
+
+#### Grant Privileges to a User
+```sql
+GRANT ALL PRIVILEGES ON my_database.* TO 'username'@'localhost';
+```
+
+#### Show User Privileges
+```sql
+SHOW GRANTS FOR 'username'@'localhost';
+```
+
+#### Revoke Privileges from a User
+```sql
+REVOKE ALL PRIVILEGES ON my_database.* FROM 'username'@'localhost';
+```
+
+#### Delete a User
+```sql
+DROP USER 'username'@'localhost';
+```
+
+## 5. Managing MySQL Service
+
+MySQL can be controlled using the `systemctl` command.
+
+#### Start MySQL
+```bash
+sudo systemctl start mysql
+```
+
+#### Stop MySQL
+```bash
+sudo systemctl stop mysql
+```
+
+#### Restart MySQL
+```bash
+sudo systemctl restart mysql
+```
+
+#### Enable MySQL to Start on Boot
+```bash
+sudo systemctl enable mysql
+```
+
+## 6. Backup and Restore MySQL Databases
+
+### Backup a Database
+To backup a MySQL database, you can use the `mysqldump` command.
+
+```bash
+mysqldump -u root -p my_database > my_database_backup.sql
+```
+
+### Restore a Database
+To restore a database from a backup, use the following command:
+
+```bash
+mysql -u root -p my_database < my_database_backup.sql
+```
+
+## 7. Reference
+
+- https://dev.mysql.com/doc/refman/8.4/en/linux-installation-apt-repo.html
+
+## 8. Conclusion
+
+MySQL is a powerful relational database management system widely used in web development. By following this guide, you can install MySQL on Debian Linux and perform basic database operations. You can further explore advanced topics such as indexing, optimization, and replication as you become more familiar with MySQL.
+
+Happy coding!

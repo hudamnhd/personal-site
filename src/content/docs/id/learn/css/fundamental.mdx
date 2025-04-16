@@ -1,0 +1,150 @@
+---
+title: CSS Fundamentals
+---
+
+## What is CSS?
+
+Cascading Style Sheets (CSS) is a stylesheet language used to describe the presentation of a document written in HTML or XML (including XML dialects such as SVG, MathML or XHTML). CSS describes how elements should be rendered on screen, on paper, in speech, or on other media.
+
+## How to Apply CSS
+
+There are 3 ways to apply CSS to HTML
+
+### Inline CSS
+
+Write directly css inside an HTML element using the `style` attribute.
+
+```html "style="color: red; font-size: 20px;""
+<p style="color: red; font-size: 20px;">This is an inline-styled paragraph.</p>
+```
+
+### Internal CSS
+Wrap css with style tag in `<head>` section.
+```html ins={2-7}
+<head>
+  <style>
+    p {
+      color: blue;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <p>This text should blue.</p>
+</body>
+```
+
+### External CSS
+
+Similar to internal css but the CSS code is written in a file
+
+```html ins={2}
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+```
+
+## Selectors
+
+CSS selector is used to select the HTML element for styling.
+
+```html
+<html>
+  <head>
+    <style>
+      /* Universal Selector */
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Element Selector */
+      p {
+        color: red;
+      }
+
+      /* Class Selector */
+      .content {
+        background-color: blue;
+      }
+
+      /* ID Selector */
+      #main-heading {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="content">
+      <h1 id="main-heading">White Color</h1>
+      <p>this background-color should be blue</p>
+      <p>this text should be red</p>
+    </article>
+  </body>
+</html>
+```
+
+
+## Fonts and Typography
+
+### Using Google Font
+
+```html ins={7-9, 12}
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>My page title</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <style>
+      body {
+          font-family: "Inter", sans-serif;
+          font-optical-sizing: auto;
+          font-weight: 400;
+          font-style: normal;
+        }
+    </style>
+  </head>
+
+  <body>
+    <!-- The main header used across all the pages of our website -->
+
+    <header>
+      <h1>Header</h1>
+    </header>
+
+    <main>
+      <!-- An article -->
+      <article>
+        <h2>Article heading</h2>
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Donec a diam
+          lectus. Set sit amet ipsum mauris. Maecenas congue ligula as quam
+          viverra nec consectetur ant hendrerit. Donec et mollis dolor. Praesent
+          et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt
+          congue enim, ut porta lorem lacinia consectetur.
+        </p>
+
+      </article>
+
+      <!-- the aside content can also be nested within the main content -->
+      <aside>
+        <h2>Related</h2>
+
+      </aside>
+    </main>
+
+    <footer>
+      <p>©Copyright 2050 by nobody. All rights reversed.</p>
+    </footer>
+  </body>
+</html>
+```
+## Reference
+
+- [Cascading Style Sheets (CSS)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+

@@ -1,0 +1,238 @@
+---
+title: Astro Fundamentals
+---
+import { Steps, LinkCard } from "@astrojs/starlight/components";
+
+## 1. Introduction to Astro
+
+Astro is a modern static site generator that allows you to build fast websites by combining different JavaScript frameworks (like React, Vue, and Svelte) and delivering minimal client-side JavaScript. Astro focuses on speed, simplicity, and ease of use. It uses a unique architecture called "Partial Hydration," which allows developers to render static HTML while progressively enhancing parts of the page with client-side interactivity.
+
+### Key Points:
+- Astro allows you to use multiple JavaScript frameworks on a single site.
+- It optimizes for performance by reducing client-side JavaScript.
+- Astro pages are rendered at build time, making it ideal for static websites.
+
+## 2. Installing Astro
+
+Follow the getting started guide from the Astro documentation.
+
+    <LinkCard
+        title="Install Astro"
+        href="https://docs.astro.build/en/install-and-setup/"
+    />
+
+## 3. Astro Pages and Routing
+
+Astro uses file-based routing, meaning the file structure in the `src/pages` directory determines the URL structure.
+
+### Creating Pages
+
+To create a new page, simply create a `.astro` file in the `src/pages` directory.
+
+For example:
+- `src/pages/index.astro` → corresponds to the `/` route.
+- `src/pages/about.astro` → corresponds to the `/about` route.
+
+### Example:
+```bash
+src/pages/index.astro
+```
+```astro
+---
+title: "Home Page"
+---
+
+<h1>Welcome to Astro</h1>
+```
+
+This will create a page accessible at `http://localhost:3000/`.
+
+### Dynamic Routes
+
+To create dynamic routes, you can use file parameters:
+
+```bash
+src/pages/posts/[slug].astro
+```
+
+This will match any URL like `/posts/my-first-post` and render the corresponding page.
+
+```astro
+---
+const { slug } = Astro.params;
+---
+
+<h1>Post: {slug}</h1>
+```
+
+## 4. Components in Astro
+
+Astro supports components from multiple frameworks, including React, Vue, and Svelte, as well as its own native `.astro` components.
+
+### Native Astro Components
+
+Astro components are written in `.astro` files. They allow you to use HTML, CSS, and JavaScript within a single file.
+
+```astro
+---
+// This is an Astro component.
+const title = 'Welcome to Astro Components!';
+---
+
+<h2>{title}</h2>
+```
+
+### Using React, Vue, or Svelte in Astro
+
+You can also use components from React, Vue, and Svelte directly in your Astro project by installing the necessary integrations.
+
+For example, to use React in Astro:
+
+1. Install the React integration:
+
+```bash
+npm install @astro/react
+```
+
+2. Create a React component:
+
+```jsx
+// src/components/MyComponent.jsx
+function MyComponent() {
+  return <p>This is a React component!</p>;
+}
+
+export default MyComponent;
+```
+
+3. Use it in an Astro page:
+
+```astro
+---
+import MyComponent from '../components/MyComponent.jsx';
+---
+
+<MyComponent />
+```
+
+This allows you to use React, Vue, and Svelte components alongside native Astro components, making it easy to mix and match frameworks in your project.
+
+## 5. Data Fetching in Astro
+
+Astro allows you to fetch data during the build process using the `Astro.fetchContent()` API.
+
+### Example: Fetching Data
+
+You can use the `Astro.fetchContent()` function to fetch data from a local markdown or JSON file.
+
+```astro
+---
+import { fetchContent } from '@astro/content';
+
+const posts = await fetchContent('./src/posts/*.md');
+---
+
+<ul>
+  {posts.map(post => (
+    <li><a href={post.url}>{post.title}</a></li>
+  ))}
+</ul>
+```
+
+### Fetching External Data
+
+You can also fetch external data during the build process.
+
+```astro
+---
+const response = await fetch('https://api.example.com/data');
+const data = await response.json();
+---
+
+<ul>
+  {data.map(item => (
+    <li>{item.name}</li>
+  ))}
+</ul>
+```
+
+## 6. Styling in Astro
+
+Astro allows you to style your components with a variety of options. You can use regular CSS, CSS modules, or pre-processors like Sass.
+
+### Example: Global Styles
+
+To add global styles, you can include your CSS file in the `src/pages/_layout.astro` file or import it in your component.
+
+```astro
+---
+import '../styles/global.css';
+---
+
+<main>
+  <slot />
+</main>
+```
+
+### Example: CSS Modules
+
+You can use scoped CSS with CSS Modules for components.
+
+```astro
+---
+import styles from './MyComponent.module.css';
+---
+
+<div class={styles.container}>
+  This is styled using CSS Modules.
+</div>
+```
+
+### Using Tailwind CSS with Astro
+
+Astro also supports Tailwind CSS. To add it, you can install the Tailwind CSS integration:
+
+```bash
+npm install @tailwindcss/vite tailwindcss
+```
+
+Then, add the integration in `astro.config.mjs`:
+
+```javascript
+import { defineConfig } from 'astro/config';
+import tailwindcss from "@tailwindcss/vite";
+
+export default defineConfig({
+	vite: {
+		plugins: [tailwindcss()],
+	}
+});
+```
+
+Now, you can use Tailwind CSS classes in your `.astro` components.
+
+## 7. Deploying Astro
+
+Once you're ready to deploy your Astro project, you can choose from a variety of deployment options. Some popular ones are:
+
+- **Vercel**: Simply push to GitHub and connect to Vercel.
+- **Netlify**: Push to GitHub and deploy using Netlify's continuous deployment.
+- **Static Hosting**: Astro is optimized for static site generation and can be deployed to any static file host.
+
+### Example: Deploy to Vercel
+
+1. Push your Astro project to GitHub.
+2. Create a new project on Vercel and link your GitHub repository.
+3. Vercel will automatically build and deploy your project.
+
+## 8. Conclusion
+
+Astro is a powerful static site generator that allows you to build fast, optimized websites. It makes it easy to use multiple frameworks in the same project and provides built-in optimizations for performance, including minimal client-side JavaScript. Whether you're building blogs, portfolios, or complex sites, Astro makes it simple and fast.
+
+Happy coding with Astro!
+
+To learn more about Astro:
+<LinkCard
+    title="Astro Docs"
+    href="https://docs.astro.build/en/getting-started/"
+/>

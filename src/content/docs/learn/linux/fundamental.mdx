@@ -1,0 +1,425 @@
+---
+title: Fundamental Linux
+sidebar:
+  order: 1
+---
+
+## Apa itu Linux?
+
+Linux® adalah sebuah sistem operasi (OS) open-source yang dibuat oleh Linus Torvalds pada 1991.
+Linuk memiliki beberapa distibusi yang terkenal, yaitu Debian, Ubuntu, Arch, Fedora dll.
+
+### Mengapa menggunakan Linux?
+
+- Gratis
+- Sepenuhnya open source.
+- Kustomisasi tidak terbatas.
+- Tidak perlu perangkat lunak berbayar antivirus.
+- Tidak memaksa pembaruan.
+- Tidak ada spyware.
+- Mudah pemasangan aplikasi.
+- Sangat ringan.
+
+## Perintah Umum Terminal
+
+### Navigasi
+
+Sebelum kita melihat beberapa perintah umum, Saya ingin menunjukan beberapa perintah keyboard yang sangat membantu.
+
+- `Up Arrow`: Will show your last command
+- `Up Arrow`: Menampilkan perintah terakhir
+- `Down Arrow`: Will show your next command
+- `Down Arrow`: Menampilkan perintah berikutnya
+- `Tab`: Auto complete perintah
+- `Ctrl + L`: Membersihkan layar
+- `Ctrl + C`: Membatalkan perintah
+- `Ctrl + R`: Mencari sebuah perintah
+- `Ctrl + D`: Keluar dari terminal
+
+### Perintah Manual
+
+Di Linux dan Mac perintah `man` digunakan untuk menampilkan **Paduan** dari sebuah perintah yang bisa dijalankan di terminal.
+Jadi jika kamu ingin tau tentang perintah `ls`, kamu bisa menjalankan:
+
+```bash
+  man ls
+```
+
+Sayangnya, jika kamu menggunakan Windows dan Git Bash, perintah `man` tidak tersedia, namun , kamu bisa hanya dengan mengetik perintah kemudian di ikuti `--help` dan kamu akan mendapatkan info yang serupa:
+
+```bash
+  ls --help
+```
+
+Kamu bisa menggunakan tombol panah keyboard atas atau bawah untuk navigasi. Ketika sudah selesai, cukup tekan `q` .
+
+### Perintah `whoami`
+
+Perintah `whoami` akan menampilkan pengguna saat ini.
+
+```bash
+  whoami
+```
+
+### Perintah `date`
+
+Perintah `date` akan menampilkan tanggal dan jam saat ini.
+
+```bash
+  date
+```
+
+### Navigasi File Sistem
+
+Perintah untuk navigasi file sistem sangat penting. Kamu mungkin akan sering menggunakannya. Kamu mungkin tidak ingat setiap perintah yang kamu gunakan, tetapi yang satu ini harus kamu ingat.
+
+| Perintah                            | Deskripsi                                                                             |
+| ----------------------------------- | ---------------------------------------------------------------------------------     |
+| pwd                                 | Menampilkan path folder saat ini.                                                     |
+| ls                                  | Daftar isi folder                                                                     |
+| ls -a                               | Daftar isi folder termasuk berkas tersembunyi (nama berkas yang dimulai dengan titik) |
+| ls -l                               | Daftar isi dengan informasi lebih banyak termasuk hak akses                           |
+| ls -r                               | Daftar isi folder dengan urutan terbalik                                              |
+| cd                                  | Mengubah direktori ke home                                                            |
+| cd [dirname]                        | Mengubah direktori ke folder spesifik                                                 |
+| cd ~                                | Mengubah direktori ke home                                                            |
+| cd ..                               | Mengubah direktori ke induk                                                           |
+| cd -                                | Mengubah direktori ke direktori sebelumnya                                            |
+| find [dirtosearch] -name [filename] | Mencari lokasi suatu program                                                          |
+
+Tentu saja, kamu bisa menggabungkan flags. Contohnya, jika saya ingin melihat lebih banyak info dan berkas tersembunyi, saya bisa melakukan  `ls -l -a` dan bahkan mempersingkat jadi `ls -la`
+
+### Membuka Folder atau File
+
+Jika kamu ingin membuka sebuah file atau folder di GUI dari terminal, perintahnya berbeda tergantung pada OS.
+
+Mac - `open [dirname]`
+Windows - `start [dirname]`
+Linux - `xdg-open [dirname]`
+
+Kamu bisa buka folder, berkas dan bahkan URL
+
+```bash
+  xdg-open https://traversymedia.com
+```
+
+### Mengubah Direktori dan Berkas
+
+| Perintah                    | Deskripsi                                            |
+| --------------------------- | ---------------------------------------------------  |
+| mkdir [dirname]             | Membuat direktori                                    |
+| touch [filename]            | Membuat berkas                                       |
+| rm [filename]               | Menghapus berkas                                     |
+| rm -i [filename]            | Menghapus direktori di ikuti muncul pertanyaan       |
+| rm -r [dirname]             | Menghapus direktori                                  |
+| rm -rf [dirname]            | Menghapus direktori beserta isinya                   |
+| rm ./\*                     | Menghapus semua yang ada di dalam direktori saat ini |
+| cp [filename] [dirname]     | Menyalin berkas                                      |
+| mv [filename] [dirname]     | Memindahkan berkas                                   |
+| mv [dirname] [dirname]      | Memindahkan direktori                                |
+| mv [filename] [filename]    | Mengubah nama berkas atau direktori                  |
+| mv [filename] [filename] -v | Rename Verbose - menampilkan asal/tujuan direktori   |
+
+Kita juga bisa melakukan beberapa perintah sekaligus dengan  operator `&&`
+
+```bash
+cd test2 && mkdir test3
+```
+
+### Right angle bracket >
+
+Simbol ini memberitahu sistem untuk mengalihkan hasil 'output' ke target. Target biasanya berupa nama berkas. Kamu bisa menggunakan simbol ini untuk membuat file baru
+
+```bash
+> [filename]
+```
+
+Biasanya perintah `echo` akan ditampilkan langsung, ketika menggunakan simbol ini hasil dari perintah echo akan di tulis di file `test.txt`.
+
+```bash
+echo "Hello, World!" > test.txt
+```
+
+Ketika sudah selesai, tekan ctrl+D untuk keluar terminal.
+
+### Perintah `cat` (concatenate)
+
+Perintah `cat` adalah perintah yang sangat umum dan memungkinkan kamu untuk membuat satu atau beberapa berkas, melihat isi dari sebuah berkas, menggabungkan berkas dan menghasilkan `output` di terminal atau berkas.
+
+Hal yang paling umum saya gunakan adalah menampilkan isi dari sebuah berkas.
+
+```bash
+  cat [filename]
+```
+
+Kamu juga bisa melihat isi dari beberapa berkas:
+
+```bash
+  cat [filename] [filename]
+```
+
+Kamu juga bisa membuat sebuah file menggunakan perintah `cat`:
+
+```bash
+  cat > [filename]
+```
+Ini akan membuka berkas baru dan kamu bisa mulai mengetik. Ketika sudah selesai, kamu bisa menekan `ctrl-d` untuk menyimpan dan keluar.
+
+
+Kamu juga bisa menambahkan text secara langsung:
+
+```bash
+  cat >> [filename]
+```
+
+Ini akan membuka berkas dan kamu bisa mulai mengetik. Ketika sudah selesai, kamu bisa menekan `ctrl-d` untuk menyimpan dan keluar.
+Text yang kamu ketik akan ditambahkan di baris baru.
+
+Melihat isi berkas dan menampilkan nomor baris:
+
+```bash
+  cat -n [filename]
+```
+
+### Perintah `less`
+
+Perintah `less` digunakan melihat isi dari sebuah berkas. Seperti `cat`, tetapi memungkinkan kamu untuk scroll ke atas dan bawah.
+
+```bash
+  less [filename]
+```
+
+Untuk keluar dari perintah`less` cukup tekan `q`.
+
+### Perintah `echo`
+
+Perintah `echo` digunakan menampilkan pesan, membuat dan menulisnya ke berkas. Seperti `cat`, tetapi digunakan untuk menampilkan sebaris dari teks.
+
+```bash
+  echo "Hello World"
+```
+
+Kamu bisa juga menggunakannya untuk membuat sebuah berkas:
+
+```bash
+  echo "Hello World" > [filename]
+```
+
+Kamu juga bisa menambahkan pesan ke dalam file:
+
+```bash
+  echo "Hello World" >> [filename]
+```
+
+### Perintah `nano`
+
+Perintah `nano` adalah text editor yang biasanya sudah terpasang secara default di sebagian besar distribusi Linux, MacOS dan kamu bahkan bisa menggunakannya dengan Git Bash di Windows. Seperti `vim` editor, tetapi lebih mudah digunakan.
+
+Kamu bisa membuka sebuah file untuk di edit atau membuat file baru dan kemudian membukanya:
+
+```bash
+  nano [filename]
+```
+
+Ketika kamu sudah selesai mengedit, cukup tekan `Ctrl + X` dan kemudian `Y` untuk menyimpan
+
+### Perintah `head` dan `tail`
+
+Perintah `head` digunakan menampilkan bagian awal dari berkas. Secara bawaan, yang di tampilkan ialah 10 baris pertama dari setiap berkas.
+
+```bash
+  head [filename]
+```
+
+Kamu juga bisa menentukan jumlah dari baris untuk di tampilkan:
+
+```bash
+  head -n 5 [filename]
+```
+
+Perintah `tail` digunakan menampilkan bagian akhir dari berkas. Secara bawaan, yang di tampilkan ialah 10 baris akhir dari setiap berkas.
+
+```bash
+  tail [filename]
+```
+
+Kamu juga bisa menentukan jumlah dari baris untuk di tampilkan:
+
+```bash
+  tail -n 5 [filename]
+```
+
+### Perintah `grep`
+
+Perintah `grep` digunakan untuk mencari pola teks dalam sebuah berkas. Perintah Ini sangat ampuh dan bisa digunakan untuk mencari `string` atau regular expression dalam sebuah berkas atau beberapa berkas.
+
+```bash
+  grep [searchterm] [filename]
+```
+
+Kamu bisa juga mencari string di beberapa berkas:
+
+```bash
+  grep [searchterm] [filename] [filename]
+```
+
+### Perintah `find`
+
+Perintah `find` sangat ampuh untuk menemukan lokasi berkas dan direktori berdasar kondisi yang kamu tentukan.
+
+Untuk memulainya, Mari kita buat 100 berkas di direktori saat ini. Ini adalah salah satu hal yang saya bahas sebelumnya, dimana kamu bisa melakukan hal-hal tertentu lebih cepat dari pada yang kamu lakukan di GUI. Kita sudah tau perintah `touch` akan membuat sebuah file. Perintah ini juga bisa digunakan untuk membuat beberapa file.
+
+```bash
+  touch file-{001..100}.txt
+```
+
+Sekarang kita punya 100 berkas .txt di direktori saat ini. Hal ini akan membutuhkan waktu lebih lama untuk dilakukan di GUI.
+
+Mari melakukan sesuatu yang sederhana dan menemukan file tertentu. format terlihat seperti ini:
+
+```bash
+  find [dirname] -name [filename]
+```
+
+Mari menemukan file `file-001.txt`
+
+```bash
+  find . -name "file-001.txt"
+```
+
+Tanda titik mewakili direktori saat ini.
+
+Kita bisa lihat di direktori lain juga. Mari buat sebuah file di `~/` dengan nama test.txt
+
+```
+  touch ~/test.txt
+```
+
+Untuk menemukan berkas tersebut:
+
+```bash
+  find ~/ -name "test.txt"
+```
+
+Kita bisa mencari berkas yang cocok dengan pola tertentu juga. Mari kita temukan semua berkas yang dimulai dengan `file-`:
+
+```bash
+  find . -name "file-*"
+```
+
+Kita bisa mencari berkas yang kosong.
+
+```bash
+  find . -empty
+```
+
+Mari tambahkan beberapa teks ke file `file-002.txt`. Kita bisa menggunakan perintah `cat`, seperti yang saya tunjukan sebelumnya, tetapi kita bisa juga menggunakan perintah `echo`:
+
+```bash
+  echo "Hello World" >> file-002.txt
+```
+
+Sekarang jika kita mencari berkas kosong lagi, kita akan lihat `file-002.txt` sudah tidak kosong.
+
+```bash
+  find . -empty
+```
+
+Kita bisa menghapus semua berkas yang kita sudah buat dengan perintah:
+
+```bash
+  find . -name "file-*" -delete
+  rm -f file-* # This will also work
+```
+
+There is so much more that you can do with the `find` command, but it goes beyond the scope of this tutorial.
+Ada begitu banyak yang bisa kamu lakukan dengan perintah `find`, tetapi itu diluar cakupan tutorial ini.
+
+### Piping
+Piping is very powerful. It is a way of redirecting standard output to another destination, such as another file. Let's actually use the find command to find a list of files and then pipe them to a new file.
+Piping sangat ampuh. Ini adalah cara untuk mengalihkan standard output ke tujuan lain, seperti ke sebuah file. Mari kita gunakan perintah `find` untuk menemukan daftar berkas kemudian menulis output ke berkas baru.
+
+Pertama, kita akan buat 10 berkas:
+
+```bash
+touch file-{001..010}.txt
+```
+
+Sekarang, mari kita menampilkan hasil dari yang di temukan ke dalam sebuah file dengan nama `output.txt`
+
+```bash
+find . -name "file-0*" > output.txt
+```
+
+Kamu bisa lihat hasilnya sekarang di berkas baru:
+
+```bash
+cat output.txt
+```
+
+### Membuat Symlink
+
+Symlink adalah jenis berkas khusus yang mengarah ke berkas lain. Ini adalah pintasan ke berkas asli. Ini berguna ketika kamu ingin mengakses sebuah berkas di lokasi lain tanpa harus menyalinnya.
+
+Kita bisa menggunakan perintah `ln` untuk membuat symlink:
+
+```bash
+  ln -s [filename] [symlinkname]
+  ln -s [originalfile] [symlinkfile]
+```
+
+Kamu bisa hapus symlink dengan perintah `rm`:
+
+```bash
+  rm [symlinkname]
+```
+
+Jika kamu di Windows dan kamu tidak menggunakan sesuatu Seperti Gita Bash, kamu bisa menggunakan perintah `mklink`:
+
+```bash
+  mklink [symlinkname] [filename]
+```
+
+### Kompresi Berkas
+
+`tar` adalah sebuah program untuk menggabukan beberapa berkas ke dalam berkas yang disebut **tarball** dan mengembalikan proses ini dengan mengekstrak berkas dari tarball
+
+| Perintah                            | Deskripsi                         |
+| ----------------------------------- | --------------------------        |
+| tar czvf [dirname].tar.gz [dirname] | Membuat tarball                   |
+| tar tzvf [dirname]                  | Melihat apa yang di dalam tarball |
+| tar xzvf [dirname].tar.gz           | mengekstrak tarball               |
+
+- -c : Creates Archive
+- -x : Extract the archive
+- -f : creates archive with given filename
+- -t : displays or lists files in archived file
+- -u : archives and adds to an existing archive file
+- -v : Displays Verbose Information
+- -A : Concatenates the archive files
+- -z : zip, tells tar command that creates tar file using gzip
+- -j : filter archive tar file using tbzip
+- -W : Verify a archive file
+- -r : update or add file or directory in already existed .tar file
+
+### Perintah `history`
+
+Digunakan untuk menampilkan riwayar dari perintah yang pernah kamu jalankan.
+
+```bash
+  history
+```
+
+kamu bisa juga menggunakan `!` untuk menjalankan perintah dari `history`
+
+```bash
+  !100
+```
+
+Ini akan menjalankan perintah ada di nomor 100 di `history`
+
+## Referensi
+
+- [Linux Definition](https://www.redhat.com/en/topics/linux/what-is-linux)
+- [Linux Commands](https://gist.githubusercontent.com/bradtraversy/cc180de0edee05075a6139e42d5f28ce/raw/7e4adb5b5b91e1c61197d6be35eabb088de2dc25/terminal-commands.md)
+

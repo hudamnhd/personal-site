@@ -1,0 +1,307 @@
+---
+title: Fundamental Tailwind CSS
+---
+
+import { Tabs, TabItem, Steps } from "@astrojs/starlight/components";
+
+## 1. Apa itu Tailwind CSS ?
+
+Tailwind CSS adalah sebuah utility-first CSS framework yang memungkinkan developer menulis kode css tanpa harus meninggalkan HTML. Tailwind menyediakan low-level utility classes yang bisa kamu kombinasi untuk membuat antar muka unix dan responsive dengan cepat.
+
+## 2. Instalasi Tailwind CSS
+
+Tailwind bisa di instal dengan berbagai cara, tergantung pada `build tool` yang kamu gunakan.
+
+### Instalasi Tailwind CSS
+
+<Steps>
+
+1. Menginstal Tailwind's official Vite plugin
+
+    <Tabs>
+        <TabItem label="npm">
+            ```sh
+            npm install --save-dev tailwindcss@next @tailwindcss/vite@next
+            ```
+        </TabItem>
+        <TabItem label="pnpm">
+            ```sh
+            pnpm add -D tailwindcss@next @tailwindcss/vite@next
+            ```
+        </TabItem>
+        <TabItem label="yarn">
+            ```sh
+            yarn add --dev tailwindcss@next @tailwindcss/vite@next
+            ```
+        </TabItem>
+    </Tabs>
+
+2. Menambakan Tailwind ke config.
+
+    <Tabs>
+        <TabItem label="react">
+            ```javascript title="vite.config.ts" ins={2,6}
+            import { defineConfig } from 'vite'
+            import tailwindcss from '@tailwindcss/vite'
+
+            export default defineConfig({
+              plugins: [
+                tailwindcss(),
+              ],
+            })
+            ```
+        </TabItem>
+        <TabItem label="astro">
+          ```ts title="astro.config.mjs" {tailwindcss()} ins={2} ins={7}
+          import { defineConfig } from 'astro/config';
+          import tailwindcss from '@tailwindcss/vite';
+
+          // https://astro.build/config
+          export default defineConfig({
+            vite: {
+              plugins: [tailwindcss()],
+            }
+          });
+          ```
+        </TabItem>
+    </Tabs>
+
+
+
+3. Mengimport file tailwind.css ke dalam layout komponent
+
+    <Tabs>
+        <TabItem label="react">
+            ```css title="src/styles/tailwind.css"
+            @import "tailwindcss";
+            ```
+
+            ```javascript title="src/main.tsx" ins={5}
+            import { StrictMode } from "react";
+            import { createRoot } from "react-dom/client";
+            import { router } from "./router";
+            import { RouterProvider } from "react-router";
+            import "./styles/tailwind.css";
+
+            createRoot(document.getElementById("root")!).render(
+                <StrictMode>
+                    <RouterProvider router={router} />
+                </StrictMode>,
+            );
+            ```
+        </TabItem>
+        <TabItem label="astro">
+
+          ```css title="src/styles/tailwind.css"
+          @import "tailwindcss";
+          ```
+          ```astro title="src/layouts/Layout.astro" ins={2} "class="max-w-2xl""
+          ---
+          import "../styles/tailwind.css";
+          ---
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <!-- ... -->
+            </head>
+            <body>
+              <article class="max-w-2xl">
+                <slot />
+              </article>
+            </body>
+          </html>
+          ```
+        </TabItem>
+    </Tabs>
+</Steps>
+
+### Instalasi CDN (cara cepat)
+
+Kamu bisa menambahkan script cdn di dalam tag `<head>` didalam file HTML:
+
+```html title="index.html" ins={6,9-11}
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <h1 class="text-3xl font-bold underline">
+      Hello world!
+    </h1>
+  </body>
+</html>
+```
+
+Metoda penginstalan yang lain : https://tailwindcss.com/docs/installation
+
+## 3. Kelas Tailwind CSS
+
+Tailwind menyediakan berbagai kelas utilitas untuk styling element. Beberapa yang paling sering digunakan:
+
+- `container`
+- `mx-auto`
+- `flex`
+- `grid`
+
+Example:
+```html
+<div class="container mx-auto">
+  <div class="grid grid-cols-3 gap-4">
+    <div class="bg-blue-500">Item 1</div>
+    <div class="bg-green-500">Item 2</div>
+    <div class="bg-red-500">Item 3</div>
+  </div>
+</div>
+```
+
+### Typography
+
+- `text-xl`, `text-2xl`: Ukuran huruf
+- `font-bold`: Menerapkan ketebalan huruf.
+- `text-center`: Teks berada di tengah.
+
+Example:
+```html
+<h1 class="text-3xl font-bold text-center">Welcome to Tailwind CSS</h1>
+<p class="text-lg text-gray-600">This is an example paragraph styled with Tailwind CSS.</p>
+```
+
+### Colors (Warna)
+
+Tailwind menyediakan banyak pilihan warna untuk huruf, latar belakang dan lain-lain.
+
+- `bg-blue-500`: seperti di css `background-color: color`.
+- `text-white`: seperti di css `color: color`.
+- `border-gray-300`: seperti di css `border-color: color`.
+
+Example:
+```html
+<div class="bg-blue-500 text-white p-4">This is a blue box.</div>
+```
+
+### Spacing (Jarak)
+
+Tailwind CSS menggunakan `spacing utilities` untuk padding dan margin.
+
+**Margin** Jarak atau ruang kosong di sekitar batas luar elemen. Margin berfungsi untuk memisahkan satu elemen dari elemen lain.
+**Padding** Jarak atau ruang kosong di dalam elemen. Padding berfungsi untuk memberikan jarak antara konten elemen dan batas (border) atau tepi elemen tersebut.
+
+- `p-4`: Menambahkan padding `1rem` pada semua sisi.
+- `m-4`: Menambahkan margin `1rem` pada semua sisi.
+- `px-6`: Menambahkan horizontal padding.
+- `py-6`: Menambahkan vertical padding.
+
+Example:
+```html
+<div class="p-6 m-4 bg-gray-200">This element has padding and margin.</div>
+```
+
+### Borders and Radius
+- `border`: Adds a border to an element.
+- `rounded`: Adds rounded corners.
+- `rounded-lg`: Adds large rounded corners.
+
+Example:
+```html
+<div class="border rounded-lg p-4">This box has a border and rounded corners.</div>
+```
+
+## 4. Responsive Design dengan Tailwind CSS
+
+Tailwind CSS menyertakan utilitas responsif yang memudahkan desain perangkat seluler.
+
+### Example of Responsive Design:
+```html
+<div class="bg-red-500 p-4 sm:bg-green-500 md:bg-blue-500 lg:bg-yellow-500">
+  This div changes color based on screen size.
+</div>
+```
+
+Explanation:
+- `sm:` diterapkan pada layar dengan lebar `640px` dan diatasnya.
+- `md:` diterapkan pada layar dengan lebar `768px` dan diatasnya.
+- `lg:` diterapkan pada layar dengan lebar `1024px` dan diatasnya.
+
+### Tailwind's Default Breakpoints:
+- `sm`: `640px` (layar kecil seperti ponsel)
+- `md`: `768px` (tablet)
+- `lg`: `1024px` (desktop)
+- `xl`: `1280px` (desktop besar)
+
+## 5. Kostumisasi Tailwind CSS
+
+Tailwind bisa dikostumisasi melalui berkas `tailwind.config.ts`, yang memungkinkan kamu untuk menambahkan atau mengubah konfigurasi bawaan.
+
+### Contoh: Menambahkan warna
+```javascript
+// tailwind.config.ts
+
+import type { Config } from 'tailwindcss';
+
+import defaultTheme from 'tailwindcss/defaultTheme';
+
+const config: Config = {
+  darkMode: ['class'],
+  content: ['./src/**/*.{html,js,svelte,ts}'],
+  theme: {
+    extend: {
+      colors: {
+        customBlue: '#1c3d5b',
+      },
+    }
+  },
+};
+
+export default config;
+```
+Di html kita cukup menggunakan kelas `<div class="text-customBlue">text</div>`
+
+### Example: Adding Custom Fonts
+```typescript
+// tailwind.config.ts
+
+import type { Config } from 'tailwindcss';
+
+import defaultTheme from 'tailwindcss/defaultTheme';
+
+const config: Config = {
+  darkMode: ['class'],
+  content: ['./src/**/*.{html,js,svelte,ts}'],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Geist', ...defaultTheme.fontFamily.sans],
+        mono: ['GeistMono', ...defaultTheme.fontFamily.mono],
+      },
+    }
+  },
+};
+
+export default config;
+```
+
+## 6. Plugin di Tailwind CSS
+
+Tailwind supports a wide range of plugins that add extra functionality.
+
+- **Typography Plugin**: For styling rich text.
+- **Forms Plugin**: For form-related utilities.
+- **Aspect-Ratio Plugin**: For controlling aspect ratios.
+
+Untuk menginstall plugin kamu bisa pakai npm atau yang lain.
+
+### Example: Installing the Typography Plugin
+```bash
+npm install @tailwindcss/typography
+```
+
+ Ditailwind versi 4 cukup menambahkan plugin di file CSS langsung:
+
+```css title="src/styles/global.css" ins={2-3}
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@config "../../tailwind.config.ts";
+```

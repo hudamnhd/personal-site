@@ -1,0 +1,234 @@
+---
+title: Prisma Fundamentals
+---
+
+## 1. Introduction to Prisma
+
+Prisma is an open-source database toolkit that helps developers work with databases more efficiently. It provides an ORM (Object-Relational Mapping) layer, which allows you to interact with your database using a type-safe API. Prisma supports various databases, including PostgreSQL, MySQL, SQLite, and more.
+
+### Key Points:
+- Prisma simplifies database interactions by automatically generating queries for you.
+- It supports migrations, type-safe queries, and auto-generated models for your database.
+- Prisma is designed to improve development speed and reduce errors when working with databases.
+
+## 2. Installing Prisma
+
+To use Prisma in your project, you first need to install it.
+
+### Step 1: Initialize a New Node.js Project
+If you don't have a Node.js project yet, initialize it with:
+```bash
+npm init -y
+```
+
+### Step 2: Install Prisma CLI
+Install Prisma CLI globally or as a development dependency.
+```bash
+npm install @prisma/cli --save-dev
+```
+
+Alternatively, you can install Prisma CLI globally:
+```bash
+npm install -g @prisma/cli
+```
+
+### Step 3: Install Prisma Client
+Prisma Client is the generated query builder that you will use to interact with your database.
+
+```bash
+npm install @prisma/client
+```
+
+### Step 4: Initialize Prisma in Your Project
+After installation, you can initialize Prisma in your project using the following command:
+
+```bash
+npx prisma init
+```
+
+This command will create the following files:
+- `prisma/schema.prisma`: The Prisma schema file.
+- `.env`: A file to store environment variables such as your database connection URL.
+
+## 3. Prisma Schema
+
+The Prisma schema defines your data model and database configuration. It is written in the Prisma schema language and contains information about your database's tables, fields, relationships, and more.
+
+### Example of a Prisma Schema:
+```prisma
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id    Int    @id @default(autoincrement())
+  name  String
+  email String @unique
+  posts Post[]
+}
+
+model Post {
+  id      Int    @id @default(autoincrement())
+  title   String
+  content String?
+  published Boolean @default(false)
+  author  User @relation(fields: [authorId], references: [id])
+  authorId Int
+}
+```
+
+### Key Points:
+- `datasource`: Defines the database provider (e.g., PostgreSQL, MySQL).
+- `generator`: Specifies the client generator, which will generate the Prisma Client for querying the database.
+- `model`: Defines the structure of a database table.
+
+## 4. Running Migrations
+
+Once you've defined your Prisma schema, you can run migrations to sync your database schema with the model.
+
+### Step 1: Create Migration
+Create a new migration file based on the changes made in the schema:
+
+```bash
+npx prisma migrate dev --name init
+```
+
+### Step 2: Apply Migration
+Prisma will apply the migration to your database and generate the Prisma Client. The `--name` option specifies the name of the migration.
+
+### Step 3: Check Migration Status
+To check the status of your migrations, you can run:
+
+```bash
+npx prisma migrate status
+```
+
+## 5. Using Prisma Client
+
+Prisma Client is the auto-generated query builder that lets you interact with your database. Once Prisma is set up, you can use the Prisma Client to perform CRUD operations.
+
+### Example: Creating a User
+```javascript
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
+
+async function main() {
+  const newUser = await prisma.user.create({
+    data: {
+      name: 'Alice',
+      email: 'alice@example.com',
+    },
+  });
+  console.log(newUser);
+}
+
+main()
+  .catch(e => {
+    throw e
+  })
+  .finally(async () => {
+    await prisma.$disconnect()
+  });
+```
+
+### Example: Fetching Users
+```javascript
+async function getUsers() {
+  const users = await prisma.user.findMany();
+  console.log(users);
+}
+```
+
+### Example: Updating a User
+```javascript
+async function updateUser(id) {
+  const updatedUser = await prisma.user.update({
+    where: { id },
+    data: { name: 'Updated Name' },
+  });
+  console.log(updatedUser);
+}
+```
+
+### Example: Deleting a User
+```javascript
+async function deleteUser(id) {
+  const deletedUser = await prisma.user.delete({
+    where: { id },
+  });
+  console.log(deletedUser);
+}
+```
+
+## 6. Filtering, Sorting, and Pagination
+
+Prisma supports powerful query capabilities, such as filtering, sorting, and pagination.
+
+### Example: Filtering Records
+```javascript
+const users = await prisma.user.findMany({
+  where: { email: 'alice@example.com' },
+});
+console.log(users);
+```
+
+### Example: Sorting Records
+```javascript
+const users = await prisma.user.findMany({
+  orderBy: {
+    name: 'asc',
+  },
+});
+console.log(users);
+```
+
+### Example: Paginating Records
+```javascript
+const users = await prisma.user.findMany({
+  skip: 0,  // Skip the first 0 records
+  take: 10, // Limit the query to 10 records
+});
+console.log(users);
+```
+
+## 7. Relations in Prisma
+
+Prisma supports one-to-one, one-to-many, and many-to-many relationships.
+
+### One-to-Many Example:
+In the Prisma schema, we have the `User` model and the `Post` model. The relationship is defined by `User` having many `Post`s.
+
+```prisma
+model User {
+  id    Int    @id @default(autoincrement())
+  name  String
+  posts Post[]
+}
+
+model Post {
+  id      Int    @id @default(autoincrement())
+  title   String
+  author  User   @relation(fields: [authorId], references: [id])
+  authorId Int
+}
+```
+
+### Querying Related Data:
+```javascript
+const userWithPosts = await prisma.user.findUnique({
+  where: { id: 1 },
+  include: { posts: true },
+});
+console.log(userWithPosts);
+```
+
+## 8. Conclusion
+
+Prisma is a powerful tool that simplifies database interactions in Node.js applications. It provides a type-safe query builder, migrations, and a clear data model. By using Prisma, developers can build faster, more efficient applications while maintaining type safety and reducing errors.
+
+Happy coding!
