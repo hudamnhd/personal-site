@@ -19,13 +19,13 @@ export default defineConfig({
 							title: "Sofware Developer",
 							picture:
 								"https://avatars.githubusercontent.com/u/127742560?s=200",
-							url: "https://hudamnhd.vercel.app",
+							url: "https://hudamnhd.dev/about-me/",
 						},
 					},
 				}),
 			],
 			editLink: {
-				baseUrl: "https://github.com/HiDeoo/starlight-blog/edit/main/docs/",
+				baseUrl: "https://github.com/hudamnhd/personal-site/edit/main/docs/",
 			},
 			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 6 },
 			title: "Huda",
@@ -36,7 +36,22 @@ export default defineConfig({
 				{
 					icon: "github",
 					label: "GitHub",
-					href: "https://github.com/withastro/starlight",
+					href: "https://github.com/hudamnhd",
+				},
+				{
+					icon: "twitter",
+					label: "Twitter",
+					href: "https://twitter.com/hudamnhd",
+				},
+				{
+					icon: "linkedin",
+					label: "LinkedIn",
+					href: "https://www.linkedin.com/in/hudamnhd",
+				},
+				{
+					icon: "email",
+					label: "Email",
+					href: "mailto:muhamadhuda519@gmail.com",
 				},
 			],
 			sidebar: [
